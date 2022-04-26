@@ -6,6 +6,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
+import edu.monash.fit2099.engine.positions.Location;
 
 /**
  * Class representing the Player.
@@ -28,10 +29,13 @@ public class Player extends Actor  {
 
 	@Override
 	public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
+		Location actorCurrentLocation = map.locationOf(this);
 		// Handle multi-turn Actions
 		if (lastAction.getNextAction() != null)
 			return lastAction.getNextAction();
 
+
+		display.println(this + this.printHp() + " at (" + actorCurrentLocation.x() + ", " + actorCurrentLocation.y() + ")");
 		// return/print the console menu
 		return menu.showMenu(this, actions, display);
 	}
