@@ -1,13 +1,19 @@
 package game.ground;
 
+import edu.monash.fit2099.engine.actions.ActionList;
+import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
+import game.Status;
+import game.actions.JumpAction;
 import game.enemies.Goomba;
+import game.interfaces.Jumpable;
 
 /**
  * @author SENG WEI HAN
  * @version 1.0
  */
-public class Sprout extends Tree {
+public class Sprout extends Tree implements Jumpable {
     private int counter;
     private static final double CHANCE_SPAWN_GOOMBA = 0.1;
 
@@ -39,5 +45,45 @@ public class Sprout extends Tree {
             location.addActor(new Goomba());
 
         }
+    }
+
+
+    public String toString(){
+        return "Sprout";
+    }
+
+
+    /**
+     *
+     * @param actor
+     * @param map
+     * @param location
+     * @return String
+     * Since sprout implements Jumpable interface, it will need to implement this jump methods.
+     * Have 90% success rate and 10 fall damage.If there player have super mushroom capability , they
+     * can jump freely.
+     */
+    @Override
+    public String jump(Actor actor, GameMap map, Location location) {
+        if(Math.random()<= 0.9 || actor.hasCapability(Status.EFFECT_SUPER_MUSHROOM)){
+            map.moveActor(actor,location);
+            return actor + " successfully jumped on top of " + this;
+        }
+        else{
+            actor.hurt(10);
+            return actor + " jumped unsuccessful and inflicted a damage of 10";
+        }
+    }
+
+
+    @Override
+    public ActionList allowableActions(Actor actor, Location location, String direction) {
+        ActionList actionList = new ActionList();
+        if (!location.containsAnActor()){
+            actionList.add(new JumpAction(this,location,direction));
+        }
+
+        return actionList;
+
     }
 }

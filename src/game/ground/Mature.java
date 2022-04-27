@@ -1,15 +1,20 @@
 package game.ground;
 
+import edu.monash.fit2099.engine.actions.ActionList;
+import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Exit;
+import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import game.Dirt;
 import game.Status;
+import game.actions.JumpAction;
 import game.enemies.Koopa;
+import game.interfaces.Jumpable;
 
 import java.util.List;
 import java.util.Random;
 
-public class Mature extends Tree {
+public class Mature extends Tree implements Jumpable {
     private int counter;
     private Random rand = new Random();
     private static final double CHANCE_SPAWN_KOOPA = 0.15;
@@ -56,6 +61,44 @@ public class Mature extends Tree {
         if (Math.random() <= 0.2){
             location.setGround(new Dirt());
         }
+
+    }
+
+    public String toString(){
+        return "Mature";
+    }
+
+
+    /**
+     *
+     * @param actor
+     * @param map
+     * @param location
+     * @return String
+     * Since mature implements Jumpable interface, it will need to implement this jump methods.
+     * Have 70% success rate and 30 fall damage.If there player have super mushroom capability , they
+     * can jump freely.
+     */
+    @Override
+    public String jump(Actor actor, GameMap map, Location location) {
+        if(Math.random()<= 0.7 || actor.hasCapability(Status.EFFECT_SUPER_MUSHROOM)){
+            map.moveActor(actor,location);
+            return actor + " successfully jumped on top of " + this;
+        }
+        else{
+            actor.hurt(30);
+            return actor + " jumped unsuccessful and inflicted a damage of 30";
+        }
+    }
+
+    @Override
+    public ActionList allowableActions(Actor actor, Location location, String direction) {
+        ActionList actionList = new ActionList();
+        if (!location.containsAnActor()){
+            actionList.add(new JumpAction(this,location,direction));
+        }
+
+        return actionList;
 
     }
 }
