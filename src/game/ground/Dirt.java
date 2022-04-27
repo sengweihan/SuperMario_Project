@@ -1,6 +1,7 @@
-package game;
+package game.ground;
 
 import edu.monash.fit2099.engine.positions.Ground;
+import game.Status;
 
 /**
  * A class that represents bare dirt.

@@ -5,27 +5,53 @@ import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
-import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.positions.GameMap;
-import game.actions.AttackAction;
-import game.Behaviour;
+import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
+import game.actions.RemoveGoombaAction;
 import game.Status;
-import game.WanderBehaviour;
+import game.reset.Resettable;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+
 /**
  * A little fungus guy.
  */
-public class Goomba extends Actor {
-	private final Map<Integer, Behaviour> behaviours = new HashMap<>(); // priority, behaviour
+public class Goomba extends Enemies implements Resettable {
+	protected final int REMOVED_FROM_MAP = 10;
+	protected Random rand = new Random();
 
 	/**
 	 * Constructor.
 	 */
 	public Goomba() {
 		super("Goomba", 'g', 50);
-		this.behaviours.put(10, new WanderBehaviour());
+
+		this.registerInstance();
+	}
+
+	public boolean remove(){
+		if ((rand.nextInt(100) <= REMOVED_FROM_MAP)){
+			return true;
+		}
+		return false;
+	}
+
+	protected IntrinsicWeapon getIntrinsicWeapon() {
+		return new IntrinsicWeapon(10, "kicks");
+	}
+
+	/**
+	 * Figure out what to do next.
+	 * @see Actor#playTurn(ActionList, Action, GameMap, Display)
+	 */
+	@Override
+	public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
+		if (this !=null && remove()){
+			return new RemoveGoombaAction();
+		}
+		else{
+			return super.playTurn(actions,lastAction,map,display);
+		}
 	}
 
 	/**
@@ -39,26 +65,11 @@ public class Goomba extends Actor {
 	 */
 	@Override
 	public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
-		ActionList actions = new ActionList();
-		// it can be attacked only by the HOSTILE opponent, and this action will not attack the HOSTILE enemy back.
-		if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
-			actions.add(new AttackAction(this,direction));
-		}
-		return actions;
+		return super.allowableActions(otherActor,direction,map);
 	}
 
-	/**
-	 * Figure out what to do next.
-	 * @see Actor#playTurn(ActionList, Action, GameMap, Display)
-	 */
 	@Override
-	public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
-		for(Behaviour Behaviour : behaviours.values()) {
-			Action action = Behaviour.getAction(this, map);
-			if (action != null)
-				return action;
-		}
-		return new DoNothingAction();
+	public void resetInstance(GameMap map) {
+		map.removeActor(this);
 	}
-
 }

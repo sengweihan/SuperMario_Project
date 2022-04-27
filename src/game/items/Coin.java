@@ -9,6 +9,5 @@ public class Coin extends Item {
     public Coin(int coinValue,String name){
         super(name,'$',true);
         this.coinValue = coinValue;
-
     }
 }
