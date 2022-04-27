@@ -8,9 +8,6 @@ import game.actions.ConsumePowerStarAction;
 public class PowerStar extends ConsumableItems{
     protected int tick = 0;
     protected final int TICK_COUNT = 10;
-    private int consumedTick = 0;
-    protected boolean idk2 = false;
-
 
     /***
      * Constructor.

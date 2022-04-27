@@ -7,7 +7,6 @@ import game.actions.ConsumePowerStarAction;
 
 public abstract class ConsumableItems extends Item {
     private boolean droppable = false;
-    protected boolean gon = false;
     /***
      * Constructor.
      *  @param name the name of this Item

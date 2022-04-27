@@ -13,7 +13,6 @@ public class SuperMushroom extends ConsumableItems {
         this.addAction(new ConsumeSuperMushroomAction(this));
     }
 
-
     @Override
     public void consumeItem(Actor actor) {
         actor.addCapability(Status.EFFECT_SUPER_MUSHROOM);
