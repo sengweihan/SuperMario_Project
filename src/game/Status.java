@@ -11,4 +11,5 @@ public enum Status {
     EFFECT_SUPER_MUSHROOM, // use this status when the player consumes super mushroom
     IMMUNITY, // use this status when the player consumes magical star, lasts for 10 turns
     DORMANT,
+    BUYING, // use this status to tell which actor can buys item from toad.
 }

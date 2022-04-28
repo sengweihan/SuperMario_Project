@@ -42,4 +42,7 @@ public class PowerStar extends ConsumableItems{
         actor.heal(200);
         actor.addCapability(Status.IMMUNITY);
     }
+
+
+
 }
