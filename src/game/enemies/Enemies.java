@@ -18,11 +18,15 @@ import game.behaviours.WanderBehaviour;
 import game.reset.Resettable;
 
 import java.util.Map;
+import java.util.Random;
 import java.util.TreeMap;
 
 public abstract class Enemies extends Actor implements Resettable {
     protected final Map<Integer, Behaviour> behaviours = new TreeMap<>(); // priority, behaviour
     protected boolean attacked = false;
+    protected Random rand = new Random();
+    protected Location previousActorLocation;
+    protected Actor previousActor;
     /**
      * Constructor.
      *
@@ -53,26 +57,49 @@ public abstract class Enemies extends Actor implements Resettable {
         Actor otherActor;
         for (Exit exit : map.locationOf(this).getExits()) {
             Location destination = exit.getDestination();
-            if (destination.containsAnActor()) {
+            if (attacked && !destination.containsAnActor()){
+                otherActor = previousActor;
+                this.behaviours.put(5,new FollowBehaviour(otherActor));
+            }
+            else if (attacked && destination.containsAnActor()){
                 otherActor = map.getActorAt(destination);
-                if (otherActor.hasCapability(Status.HOSTILE_TO_ENEMY) && destination.containsAnActor()){
-                    if (this.behaviours.get(0) == null){
+                if (otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
+                    if (this.behaviours.get(5) != null){
+                        this.behaviours.remove(5);
+                    }
+                    if (successAttack()){
                         this.behaviours.put(0, new AttackBehaviour(otherActor));
-                        attacked = true;
                     }
                 }
             }
-            else if (attacked){
-                this.behaviours.remove(0);
+            else if (!attacked && destination.containsAnActor()) {
                 otherActor = map.getActorAt(destination);
-                this.behaviours.put(5,new FollowBehaviour(otherActor));
+                if (otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)){
+                    if (successAttack()){
+                        this.behaviours.put(0, new AttackBehaviour(otherActor));
+                        attacked = true;
+                        previousActorLocation = destination;
+                        previousActor = destination.getActor();
+                        break;
+                    }
+                }
             }
         }
+
+
+
         for(Behaviour behaviour : behaviours.values()) {
             Action action = behaviour.getAction(this, map);
             if (action != null)
                 return action;
         }
         return new DoNothingAction();
+    }
+
+    public boolean successAttack(){
+        if (this.getWeapon().chanceToHit() > rand.nextInt(100)){
+            return true;
+        }
+        return false;
     }
 }

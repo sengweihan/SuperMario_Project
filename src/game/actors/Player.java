@@ -8,7 +8,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
 import edu.monash.fit2099.engine.positions.Location;
 import game.Status;
-import game.WalletSystem;
+//import game.WalletSystem;
 import game.actions.ResetAction;
 import game.reset.ResetManager;
 import game.reset.Resettable;
@@ -33,10 +33,10 @@ public class Player extends Actor implements Resettable {
 	 */
 	public Player(String name, char displayChar, int hitPoints) {
 		super(name, displayChar, hitPoints);
-		WalletSystem.setPlayer(this);
+//		WalletSystem.setPlayer(this);
 		walletValue = INITIAL_WALLET_VALUE;
 		this.addCapability(Status.HOSTILE_TO_ENEMY);
-		this.addCapability(Status.BUYING);
+//		this.addCapability(Status.BUYING);
 		this.registerInstance();
 	}
 

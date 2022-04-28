@@ -21,12 +21,6 @@ public class NPCAttackAction extends Action {
      * The direction of incoming attack.
      */
     protected String direction;
-
-    /**
-     * Random number generator
-     */
-    protected Random rand = new Random();
-
     /**
      * Constructor.
      *
@@ -41,10 +35,6 @@ public class NPCAttackAction extends Action {
     public String execute(Actor actor, GameMap map) {
 
         Weapon weapon = actor.getWeapon();
-
-        if (!(rand.nextInt(100) <= weapon.chanceToHit())) {
-            return actor + " misses " + target + ".";
-        }
 
         int damage = weapon.damage();
         String result = actor + " " + weapon.verb() + " " + target + " for " + damage + " damage.";
