@@ -1,11 +1,11 @@
-package game;
+package game.behaviours;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 
 public interface Behaviour {
-	
+
 	/**
 	 * A factory for creating actions. Chaining these together can result in an actor performing more complex tasks.
 	 *
@@ -17,7 +17,7 @@ public interface Behaviour {
 	 * to be reused in other Actors via delegation instead of inheritance.
 	 *
 	 * An Actor's {@code playTurn()} method can use Behaviours to help decide which Action to
-     * perform next.  It can also simply create Actions itself, and for simpler Actors this is
+	 * perform next.  It can also simply create Actions itself, and for simpler Actors this is
 	 * likely to be sufficient.  However, using Behaviours allows
 	 * us to modularize the code that decides what to do, and that means that it can be 
 	 * reused if (e.g.) more than one kind of Actor needs to be able to seek, follow, or hide.

@@ -1,4 +1,6 @@
-package game;
+package game.reset;
+
+import edu.monash.fit2099.engine.positions.GameMap;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +24,8 @@ public class ResetManager {
      */
     private static ResetManager instance;
 
+    private boolean hasReset;
+
     /**
      * Get the singleton instance of reset manager
      * @return ResetManager singleton instance
@@ -38,13 +42,22 @@ public class ResetManager {
      */
     private ResetManager(){
         resettableList = new ArrayList<>();
+        hasReset = false;
+    }
+
+    public boolean getHasReset(){
+        return hasReset;
     }
 
     /**
      * Reset the game by traversing through all the list
      * By doing this way, it will avoid using `instanceof` all over the place.
      */
-    public void run(){
+    public void run(GameMap map){
+        for (Resettable reset: resettableList){
+            reset.resetInstance(map);
+        }
+        hasReset = true;
     }
 
     /**
@@ -52,6 +65,8 @@ public class ResetManager {
      * FIXME: it does nothing, you need to implement it :)
      */
     public void appendResetInstance(Resettable reset){
+        if (!hasReset)
+            resettableList.add(reset);
     }
 
 
@@ -61,5 +76,6 @@ public class ResetManager {
      * FIXME: it does nothing, you need to implement it :)
      */
     public void cleanUp(Resettable resettable){
+        resettableList.remove(resettable);
     }
 }
