@@ -8,10 +8,10 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
 import edu.monash.fit2099.engine.positions.Location;
 import game.Status;
-//import game.WalletSystem;
 import game.actions.ResetAction;
 import game.reset.ResetManager;
 import game.reset.Resettable;
+import game.systems.WalletSystem;
 
 /**
  * Class representing the Player.
@@ -22,7 +22,7 @@ public class Player extends Actor implements Resettable {
 	protected int tick = 0;
 	protected final int TICK_COUNT = 10;
 	protected final static int INITIAL_WALLET_VALUE = 1300;
-	private static int walletValue ;
+	public int walletValue ;
 
 	/**
 	 * Constructor.
@@ -33,10 +33,10 @@ public class Player extends Actor implements Resettable {
 	 */
 	public Player(String name, char displayChar, int hitPoints) {
 		super(name, displayChar, hitPoints);
-//		WalletSystem.setPlayer(this);
+		WalletSystem.setPlayer(this); // used to tell that this wallet only belongs to this player.
 		walletValue = INITIAL_WALLET_VALUE;
 		this.addCapability(Status.HOSTILE_TO_ENEMY);
-//		this.addCapability(Status.BUYING);
+		this.addCapability(Status.BUYING);
 		this.registerInstance();
 	}
 
@@ -66,7 +66,7 @@ public class Player extends Actor implements Resettable {
 		}
 		// return/print the console menu
 		display.println(this + this.printHp() + " at (" + actorCurrentLocation.x() + ", " + actorCurrentLocation.y() + ")");
-		display.println("wallet: $" + Player.getWalletValue());
+		display.println("wallet: $" + WalletSystem.getWalletValue());
 		return menu.showMenu(this, actions, display);
 	}
 
@@ -83,16 +83,5 @@ public class Player extends Actor implements Resettable {
 		this.removeCapability(Status.EFFECT_SUPER_MUSHROOM);
 	}
 
-	public static int getWalletValue() {
-		return walletValue;
-	}
-
-	public static void setWallet(int value) {
-		walletValue += value;
-	}
-
-	public static void deductWalletValue(int value){
-		walletValue -= value;
-	}
 }
 
