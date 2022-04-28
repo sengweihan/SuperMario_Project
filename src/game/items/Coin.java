@@ -1,19 +1,28 @@
 package game.items;
 
+import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.items.DropItemAction;
 import edu.monash.fit2099.engine.items.Item;
+import edu.monash.fit2099.engine.items.PickUpItemAction;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.positions.NumberRange;
+import game.actions.PickUpCoinAction;
+import game.interfaces.PickableCoin;
 import game.reset.Resettable;
+import game.systems.WalletSystem;
 
-public class Coin extends Item implements Resettable {
+public class Coin extends Item implements Resettable, PickableCoin {
     private int coinValue;
 
     public Coin(int coinValue,String name) {
         super(name, '$', true);
         this.coinValue = coinValue;
+        this.addAction(new PickUpCoinAction(this));
         this.registerInstance();
     }
+
+
 
     @Override
     public void resetInstance(GameMap map) {
@@ -27,5 +36,22 @@ public class Coin extends Item implements Resettable {
                 }
             }
         }
+    }
+
+    @Override
+    public String pickableCoin(Actor actor, GameMap map) {
+        WalletSystem.addWalletValue(coinValue);
+        map.locationOf(actor).removeItem(this);
+        return actor + " picked up $" + coinValue + " coin";
+    }
+
+    @Override
+    public DropItemAction getDropAction(Actor actor) {
+        return null;
+    }
+
+    @Override
+    public PickUpItemAction getPickUpAction(Actor actor) {
+        return null;
     }
 }
