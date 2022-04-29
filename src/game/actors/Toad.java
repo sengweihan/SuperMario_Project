@@ -46,6 +46,9 @@ public class Toad extends Actor {
         for (Item item : sellerItem.keySet()){
             actionsList.add(new BuyAction(item,sellerItem.get(item),item.toString()));
         }
+
         return actionsList;
-    }
+        }
+
+
 }
