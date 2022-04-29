@@ -86,8 +86,6 @@ public abstract class Enemies extends Actor implements Resettable {
             }
         }
 
-
-
         for(Behaviour behaviour : behaviours.values()) {
             Action action = behaviour.getAction(this, map);
             if (action != null)
