@@ -7,7 +7,10 @@ import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.items.Item;
+import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.Weapon;
+import game.Status;
+import game.items.SuperMushroom;
 
 /**
  * Special Action for attacking other Actors.
@@ -49,20 +52,35 @@ public class AttackAction extends Action {
 		}
 
 		int damage = weapon.damage();
+		if (actor.hasCapability(Status.IMMUNITY)){
+			damage = 500;
+		}
 		String result = actor + " " + weapon.verb() + " " + target + " for " + damage + " damage.";
 		target.hurt(damage);
-		if (!target.isConscious()) {
-			ActionList dropActions = new ActionList();
-			// drop all items
-			for (Item item : target.getInventory())
-				dropActions.add(item.getDropAction(actor));
-			for (Action drop : dropActions)
-				drop.execute(target, map);
-			// remove actor
-			map.removeActor(target);
-			result += System.lineSeparator() + target + " is killed.";
-		}
 
+		if (!target.isConscious()) {
+			if (actor.hasCapability(Status.IMMUNITY)){
+				if (target.getDisplayChar()=='K') {
+					Location dropMushroom = map.locationOf(target);
+					dropMushroom.addItem(new SuperMushroom());
+				}
+				// remove actor
+				map.removeActor(target);
+				result += System.lineSeparator() + target + " is killed.";
+			}
+			else {
+				if (target.getDisplayChar()=='K') {
+					if (!target.hasCapability(Status.DORMANT)){
+						target.addCapability(Status.DORMANT);
+					}
+				}
+				else {
+					// remove actor
+					map.removeActor(target);
+					result += System.lineSeparator() + target + " is killed.";
+				}
+			}
+		}
 		return result;
 	}
 

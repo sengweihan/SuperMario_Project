@@ -46,16 +46,13 @@ public class DestroyShellAction extends Action {
         }
 
         int damage = weapon.damage();
-        String result = actor + " " + weapon.verb() + " " + target + " for " + damage + " damage.";
+        String result = actor + " destroyed " + target + "'s shell!";
         target.hurt(damage);
+        Location dropMushroom = map.locationOf(target);
+        map.removeActor(target);
+        dropMushroom.addItem(new SuperMushroom());
+        result += System.lineSeparator() + target + " is killed and it drops a Super Mushroom!";
 
-        if (!target.isConscious()) {
-            // remove actor
-            Location dropMushroom = map.locationOf(target);
-            map.removeActor(target);
-            dropMushroom.addItem(new SuperMushroom());
-            result += System.lineSeparator() + target + " is killed and it drops a Super Mushroom!";
-        }
         return result;
     }
 
