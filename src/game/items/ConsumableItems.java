@@ -6,7 +6,6 @@ import edu.monash.fit2099.engine.items.Item;
 import game.actions.ConsumePowerStarAction;
 
 public abstract class ConsumableItems extends Item {
-    private boolean droppable = false;
     /***
      * Constructor.
      *  @param name the name of this Item
@@ -19,8 +18,6 @@ public abstract class ConsumableItems extends Item {
 
     @Override
     public DropItemAction getDropAction(Actor actor) {
-        if (droppable)
-            return new DropItemAction(this);
         return null;
     }
 
