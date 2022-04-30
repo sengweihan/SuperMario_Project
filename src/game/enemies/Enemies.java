@@ -77,6 +77,7 @@ public abstract class Enemies extends Actor implements Resettable {
                 if (otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)){
                     if (successAttack()){
                         this.behaviours.put(0, new AttackBehaviour(otherActor));
+                        this.behaviours.remove(10);
                         attacked = true;
                         previousActorLocation = destination;
                         previousActor = destination.getActor();
