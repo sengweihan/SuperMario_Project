@@ -89,15 +89,4 @@ public class Mature extends Tree implements Jumpable {
             return actor + " jumped unsuccessful and inflicted a damage of 30";
         }
     }
-
-    @Override
-    public ActionList allowableActions(Actor actor, Location location, String direction) {
-        ActionList actionList = new ActionList();
-        if (!location.containsAnActor()){
-            actionList.add(new JumpAction(this,location,direction));
-        }
-
-        return actionList;
-
-    }
 }

@@ -7,7 +7,9 @@ import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 import game.Status;
 import game.actions.JumpAction;
+import game.actions.PowerStarMoveAction;
 import game.interfaces.Jumpable;
+import game.items.Coin;
 
 public class Wall extends Ground implements Jumpable {
 
@@ -55,7 +57,10 @@ public class Wall extends Ground implements Jumpable {
 	@Override
 	public ActionList allowableActions(Actor actor, Location location, String direction) {
 		ActionList actionList = new ActionList();
-		if (!location.containsAnActor()){
+		if (actor.hasCapability(Status.IMMUNITY) && !location.containsAnActor()){
+			actionList.add(new PowerStarMoveAction(location,direction));
+		}
+		else if (!location.containsAnActor()){
 			actionList.add(new JumpAction(this,location,direction));
 		}
 

@@ -6,8 +6,10 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import game.Status;
 import game.actions.JumpAction;
+import game.actions.PowerStarMoveAction;
 import game.enemies.Goomba;
 import game.interfaces.Jumpable;
+import game.items.Coin;
 
 /**
  * @author SENG WEI HAN
@@ -73,17 +75,5 @@ public class Sprout extends Tree implements Jumpable {
             actor.hurt(10);
             return actor + " jumped unsuccessful and inflicted a damage of 10";
         }
-    }
-
-
-    @Override
-    public ActionList allowableActions(Actor actor, Location location, String direction) {
-        ActionList actionList = new ActionList();
-        if (!location.containsAnActor()){
-            actionList.add(new JumpAction(this,location,direction));
-        }
-
-        return actionList;
-
     }
 }
