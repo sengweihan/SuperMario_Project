@@ -28,6 +28,16 @@ public class PowerStar extends ConsumableItems{
     }
 
     @Override
+    public void tick(Location currentLocation) {
+        if (tick < TICK_COUNT && tick != 10){
+            tick++;
+        }
+        else {
+            currentLocation.removeItem(this);
+        }
+    }
+
+    @Override
     public void consumeItem(Actor actor) {
         actor.heal(200);
         actor.addCapability(Status.IMMUNITY);
