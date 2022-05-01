@@ -14,6 +14,7 @@ import game.enemies.Goomba;
 import game.actors.Player;
 import game.ground.*;
 import game.items.PowerStar;
+import game.items.SuperMushroom;
 
 /**
  * The main class for the Mario World game.
@@ -51,14 +52,18 @@ public class Application {
 			GameMap gameMap = new GameMap(groundFactory, map);
 			world.addGameMap(gameMap);
 
-			Actor mario = new Player("Player", 'm', 500);
+			Actor mario = new Player("Mario", 'm', 100);
 			world.addPlayer(mario, gameMap.at(42, 10));
 
 			Actor toad = new Toad("MR.TOAD",'O',999);
 			gameMap.addActor(toad,gameMap.at(44,11));
 
+			gameMap.locationOf(mario).addItem(new PowerStar());
+			gameMap.locationOf(mario).addItem(new SuperMushroom());
 
-			world.run();
+
+
+		world.run();
 
 	}
 }

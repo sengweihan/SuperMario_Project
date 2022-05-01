@@ -7,7 +7,7 @@ import game.actions.ConsumePowerStarAction;
 
 public class PowerStar extends ConsumableItems{
     protected int tick = 0;
-    protected final int TICK_COUNT = 11;
+    protected static final int TICK_COUNT = 11;
 
     /***
      * Constructor.
