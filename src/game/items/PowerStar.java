@@ -7,7 +7,7 @@ import game.actions.ConsumePowerStarAction;
 
 public class PowerStar extends ConsumableItems{
     protected int tick = 0;
-    protected final int TICK_COUNT = 10;
+    protected final int TICK_COUNT = 11;
 
     /***
      * Constructor.
@@ -19,21 +19,11 @@ public class PowerStar extends ConsumableItems{
 
     @Override
     public void tick(Location location, Actor actor){
-        if (tick < TICK_COUNT){
+        if (tick < TICK_COUNT && tick != 10){
             tick++;
         }
         else {
             actor.removeItemFromInventory(this);
-        }
-    }
-
-    @Override
-    public void tick(Location currentLocation) {
-        if (tick < TICK_COUNT){
-            currentLocation.removeItem(this);
-        }
-        else {
-            tick++;
         }
     }
 
@@ -43,6 +33,8 @@ public class PowerStar extends ConsumableItems{
         actor.addCapability(Status.IMMUNITY);
     }
 
-
-
+    @Override
+    public String toString() {
+        return "PowerStar - " + (TICK_COUNT-tick) + " turns remaining";
+    }
 }

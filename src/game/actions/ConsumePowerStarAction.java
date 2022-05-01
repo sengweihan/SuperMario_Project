@@ -25,7 +25,7 @@ public class ConsumePowerStarAction extends ConsumeItemAction {
                 map.locationOf(actor).removeItem(item);
                 item.consumeItem(actor);
             }
-            return actor + " has consumed "+ item + "!";
+            return actor + " has consumed Power Star!";
         }
     }
 }
