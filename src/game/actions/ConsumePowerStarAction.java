@@ -17,8 +17,14 @@ public class ConsumePowerStarAction extends ConsumeItemAction {
             return actor + " has already consumed a Power Star!";
         }
         else {
-            actor.removeItemFromInventory(item);
-            item.consumeItem(actor);
+            if (actor.getInventory().contains(item)) {
+                actor.removeItemFromInventory(item);
+                item.consumeItem(actor);
+            }
+            else {
+                map.locationOf(actor).removeItem(item);
+                item.consumeItem(actor);
+            }
             return actor + " has consumed "+ item + "!";
         }
     }
