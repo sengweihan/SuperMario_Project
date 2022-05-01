@@ -10,6 +10,9 @@ import game.Status;
 import game.actions.DestroyShellAction;
 import game.actions.DormantAction;
 
+/**
+ * an enemy that has a shell
+ */
 public class Koopa extends Enemies {
 
     /**
@@ -17,7 +20,6 @@ public class Koopa extends Enemies {
      */
     public Koopa() {
         super("Koopa", 'K', 100);
-        this.registerInstance();
     }
 
     protected IntrinsicWeapon getIntrinsicWeapon() {
@@ -25,8 +27,9 @@ public class Koopa extends Enemies {
     }
 
     /**
-     * At the moment, we only make it can be attacked by Player.
-     * You can do something else with this method.
+     * if current Koopa has Dormant status and player has a wrench, it will return
+     * a DestroyShellAction for the player to attack the Koopa.
+     *
      * @param otherActor the Actor that might perform an action.
      * @param direction  String representing the direction of the other Actor
      * @param map        current GameMap
@@ -49,7 +52,8 @@ public class Koopa extends Enemies {
     }
 
     /**
-     * Figure out what to do next.
+     * Figure out what to do next. if current Koopa object has Dormant status,
+     * returns a Dormant Action.
      * @see Actor#playTurn(ActionList, Action, GameMap, Display)
      */
     @Override
@@ -61,11 +65,5 @@ public class Koopa extends Enemies {
         else{
             return super.playTurn(actions,lastAction,map,display);
         }
-    }
-
-
-    @Override
-    public void resetInstance(GameMap map) {
-        map.removeActor(this);
     }
 }

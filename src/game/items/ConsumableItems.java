@@ -5,6 +5,9 @@ import edu.monash.fit2099.engine.items.DropItemAction;
 import edu.monash.fit2099.engine.items.Item;
 import game.actions.ConsumePowerStarAction;
 
+/**
+ * Base class for ConsumeableItems. These represent items that can be consumed by the actor
+ */
 public abstract class ConsumableItems extends Item {
     /***
      * Constructor.
@@ -16,10 +19,21 @@ public abstract class ConsumableItems extends Item {
         super(name, displayChar, portable);
     }
 
+    /**
+     * if the item is picked up, it cannot be dropped
+     * @param actor the actor that drops the item
+     * @return null
+     */
     @Override
     public DropItemAction getDropAction(Actor actor) {
         return null;
     }
 
+    /**
+     * abstract method that applies the buffs to the actor
+     * after the actor consumes the item.
+     *
+     * @param actor the actor that consumes the item
+     */
     public abstract void consumeItem(Actor actor);
 }

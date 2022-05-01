@@ -25,10 +25,14 @@ public class Goomba extends Enemies implements Resettable {
 	 */
 	public Goomba() {
 		super("Goomba", 'g', 20);
-
-		this.registerInstance();
 	}
 
+	/**
+	 * a method to check if Goomba hits the 10% chance of being removed
+	 * from the game
+	 *
+	 * @return true if hits 10% chance of being removed from the map, else false
+	 */
 	public boolean remove(){
 		if ((rand.nextInt(100) <= REMOVED_FROM_MAP)){
 			return true;
@@ -41,7 +45,8 @@ public class Goomba extends Enemies implements Resettable {
 	}
 
 	/**
-	 * Figure out what to do next.
+	 * Figure out what to do next. if current Goomba is not a null object, and
+	 * remove() method returns true, returns a RemoveGoombaAction()
 	 * @see Actor#playTurn(ActionList, Action, GameMap, Display)
 	 */
 	@Override
@@ -66,10 +71,5 @@ public class Goomba extends Enemies implements Resettable {
 	@Override
 	public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
 		return super.allowableActions(otherActor,direction,map);
-	}
-
-	@Override
-	public void resetInstance(GameMap map) {
-		map.removeActor(this);
 	}
 }

@@ -9,7 +9,9 @@ import edu.monash.fit2099.engine.weapons.Weapon;
 import game.Status;
 
 import java.util.Random;
-
+/**
+ * Special Action for NPC to attack Player.
+ */
 public class NPCAttackAction extends Action {
 
     /**
@@ -37,6 +39,15 @@ public class NPCAttackAction extends Action {
         this.direction = direction;
     }
 
+    /**
+     * an execute method for NPC to run and attack the player.
+     * contains multiple if-statements to check if player has certain capabilities
+     * so that the game can proceed correctly.
+     *
+     * @param actor The actor performing the action.
+     * @param map The map the actor is on.
+     * @return a string that either NPC misses the player or NPC attacked/killed the player.
+     */
     @Override
     public String execute(Actor actor, GameMap map) {
 
@@ -76,6 +87,13 @@ public class NPCAttackAction extends Action {
         return result;
     }
 
+    /**
+     * display the menu description of what the NPC can do, in this case,
+     * attack the player.
+     *
+     * @param actor The actor performing the action.
+     * @return a string that displays "actor attacks who at which direction"
+     */
     @Override
     public String menuDescription(Actor actor) {
         return actor + " attacks " + target + " at " + direction;

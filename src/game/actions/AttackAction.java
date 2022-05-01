@@ -10,10 +10,11 @@ import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.Weapon;
 import game.Status;
+import game.enemies.Enemies;
 import game.items.SuperMushroom;
 
 /**
- * Special Action for attacking other Actors.
+ * Special Action for Player to attack other Actors.
  */
 public class AttackAction extends Action {
 
@@ -37,11 +38,20 @@ public class AttackAction extends Action {
 	 * 
 	 * @param target the Actor to attack
 	 */
-	public AttackAction(Actor target, String direction) {
+	public AttackAction(Enemies target, String direction) {
 		this.target = target;
 		this.direction = direction;
 	}
 
+	/**
+	 * an execute method to run and attack the target.
+	 * contains multiple if-statements to check if actor (player) has certain
+	 * capabilites so that the game can proceed correctly
+	 *
+	 * @param actor The actor performing the action.
+	 * @param map The map the actor is on.
+	 * @return a string that either actor misses the target or actor attacked/killed the target
+	 */
 	@Override
 	public String execute(Actor actor, GameMap map) {
 
@@ -84,6 +94,13 @@ public class AttackAction extends Action {
 		return result;
 	}
 
+	/**
+	 * display the menu description of what the actor can do, in this case,
+	 * attack other actor
+	 *
+	 * @param actor The actor performing the action.
+	 * @return a string that displays "actor attacks who at which direction"
+	 */
 	@Override
 	public String menuDescription(Actor actor) {
 		return actor + " attacks " + target + " at " + direction;

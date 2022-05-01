@@ -10,6 +10,11 @@ import game.items.SuperMushroom;
 
 import java.util.Random;
 
+/**
+ * a specific class that is designed for player to
+ * destroy Koopa's shell and defeat Koopa
+ * this action is only available if player has a wrench
+ */
 public class DestroyShellAction extends Action {
     /**
      * The Actor that is to be attacked
@@ -35,7 +40,14 @@ public class DestroyShellAction extends Action {
         this.target = target;
         this.direction = direction;
     }
-
+    /**
+     * an execute method to run and attack the Koopa
+     * drops a super mushroom if Koopa is killed
+     *
+     * @param actor The actor performing the action.
+     * @param map The map the actor is on.
+     * @return a string that either actor misses the target or actor attacked/killed the Koopa
+     */
     @Override
     public String execute(Actor actor, GameMap map) {
 
@@ -56,6 +68,13 @@ public class DestroyShellAction extends Action {
         return result;
     }
 
+    /**
+     * display the menu description of what the actor can do, in this case,
+     * destroys Koopa's shell
+     *
+     * @param actor The actor performing the action.
+     * @return a string that displays "actor attacks who at which direction"
+     */
     @Override
     public String menuDescription(Actor actor) {
         return actor + " destroys " + target + "(dormant)";

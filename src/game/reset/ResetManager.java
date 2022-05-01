@@ -52,17 +52,20 @@ public class ResetManager {
     /**
      * Reset the game by traversing through all the list
      * By doing this way, it will avoid using `instanceof` all over the place.
+     *
+     * @param map the current game map the actor is in
      */
     public void run(GameMap map){
         for (Resettable reset: resettableList){
             reset.resetInstance(map);
+            cleanUp(reset);
         }
         hasReset = true;
     }
 
     /**
-     * Add the Resettable instance to the list
-     * FIXME: it does nothing, you need to implement it :)
+     * Add the Resettable instance to the list, only if the game
+     * has not been reset by the player
      */
     public void appendResetInstance(Resettable reset){
         if (!hasReset)
@@ -73,7 +76,6 @@ public class ResetManager {
     /**
      * Remove a Resettable instance from the list
      * @param resettable resettable object
-     * FIXME: it does nothing, you need to implement it :)
      */
     public void cleanUp(Resettable resettable){
         resettableList.remove(resettable);

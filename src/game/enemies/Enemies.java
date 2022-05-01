@@ -21,11 +21,31 @@ import java.util.Map;
 import java.util.Random;
 import java.util.TreeMap;
 
+/**
+ * an abstract class to classify subclasses extending this class
+ * to be the enemy in the game
+ */
 public abstract class Enemies extends Actor implements Resettable {
+    /**
+     * TreeMap to store the behaviours
+     */
     protected final Map<Integer, Behaviour> behaviours = new TreeMap<>(); // priority, behaviour
+    /**
+     * a variable to check if the current object of enemy has attacked a
+     * target already or not
+     */
     protected boolean attacked = false;
+    /**
+     * Random Number Generator
+     */
     protected Random rand = new Random();
+    /**
+     * target's previous location
+     */
     protected Location previousActorLocation;
+    /**
+     * variable to store the target object
+     */
     protected Actor previousActor;
     /**
      * Constructor.
@@ -37,6 +57,7 @@ public abstract class Enemies extends Actor implements Resettable {
     public Enemies(String name, char displayChar, int hitPoints) {
         super(name, displayChar, hitPoints);
         this.behaviours.put(10, new WanderBehaviour());
+        this.registerInstance();
     }
 
     @Override
@@ -52,6 +73,18 @@ public abstract class Enemies extends Actor implements Resettable {
         return actions;
     }
 
+    /**
+     * checks every turn if the enemy's exits contains the player, if yes, puts
+     * a AttackBehaviour inside the TreeMap, and attack, else if the current enemy
+     * attacked the player already, and the player isn't in the enemy exit's, put a
+     * FollowBehaviour to follow the player around the map.
+     *
+     * @param actions    collection of possible Actions for this Actor
+     * @param lastAction The Action this Actor took last turn. Can do interesting things in conjunction with Action.getNextAction()
+     * @param map        the map containing the Actor
+     * @param display    the I/O object to which messages may be written
+     * @return an action from the TreeMap
+     */
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
         Actor otherActor;
@@ -95,10 +128,19 @@ public abstract class Enemies extends Actor implements Resettable {
         return new DoNothingAction();
     }
 
+    /**
+     * a method to check if the enemy successfully attacks the target
+     * @return true if it successfully lands an attack, else false
+     */
     public boolean successAttack(){
         if (this.getWeapon().chanceToHit() > rand.nextInt(100)){
             return true;
         }
         return false;
+    }
+
+    @Override
+    public void resetInstance(GameMap map) {
+        map.removeActor(this);
     }
 }
