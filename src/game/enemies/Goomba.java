@@ -24,7 +24,7 @@ public class Goomba extends Enemies implements Resettable {
 	 * Constructor.
 	 */
 	public Goomba() {
-		super("Goomba", 'g', 50);
+		super("Goomba", 'g', 20);
 
 		this.registerInstance();
 	}

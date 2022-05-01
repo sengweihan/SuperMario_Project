@@ -46,7 +46,7 @@ public class Wall extends Ground implements Jumpable {
 	public String jump(Actor actor, GameMap map, Location location) {
 		if(Math.random()<= 0.8 || actor.hasCapability(Status.EFFECT_SUPER_MUSHROOM)){
 			map.moveActor(actor,location);
-			return actor + " successfully jumped on top of " + this;
+			return actor + " successfully jumped on top of " + this + "(" + location.x() + ", " + location.y() + ")";
 		}
 		else{
 			actor.hurt(20);

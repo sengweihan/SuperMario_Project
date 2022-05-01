@@ -23,15 +23,15 @@ public class BuyAction extends Action {
     @Override
     public String execute(Actor actor, GameMap map) {
         String message = "";
-        if (actor.hasCapability(Status.BUYING) && WalletSystem.getWalletValue() > this.cost){
+        if (actor.hasCapability(Status.BUYING) && WalletSystem.getWalletValue() > cost){
             actor.addItemToInventory(item);
             WalletSystem.subtractWalletValue(cost);
-            message += actor + " successfully bought " + this.name;
+            message += actor + " successfully bought " + name;
             return message;
 
         }
         else{
-            message += actor + " do not have enough coins to buy " + this.item;
+            message += actor + " do not have enough coins to buy " + name + "!";
             return message;
         }
     }
