@@ -8,6 +8,9 @@ import game.Status;
  */
 public class Dirt extends Ground {
 
+	/**
+	 * A constructor.
+	 */
 	public Dirt() {
 		super('.');
 		this.addCapability(Status.FERTILE);

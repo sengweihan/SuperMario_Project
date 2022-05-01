@@ -12,6 +12,12 @@ public class Floor extends Ground {
 		super('_');
 	}
 
+	/**
+	 * This method will only allow player to enter and not other actor such as koopa,goomba or toad.
+	 *
+	 * @param actor the Actor to check
+	 * @return a boolean value
+	 */
 	@Override
 	public boolean canActorEnter(Actor actor) {
 		if (actor.hasCapability(Status.HOSTILE_TO_ENEMY)){

@@ -13,10 +13,19 @@ import game.items.Coin;
 
 public class Wall extends Ground implements Jumpable {
 
+	/**
+	 * A constructor.
+	 */
 	public Wall() {
 		super('#');
 	}
-	
+
+	/**
+	 * Does not allow any actor to enter unless they uses a jump action.
+	 *
+	 * @param actor the Actor to check
+	 * @return a boolean
+	 */
 	@Override
 	public boolean canActorEnter(Actor actor) {
 		return false;
@@ -27,6 +36,11 @@ public class Wall extends Ground implements Jumpable {
 		return true;
 	}
 
+	/**
+	 * The string that will be printed out when the instance of this class is being called.
+	 *
+	 * @return a string
+	 */
 	public String toString(){
 		return "Wall";
 	}
@@ -54,6 +68,16 @@ public class Wall extends Ground implements Jumpable {
 		}
 	}
 
+	/**
+	 * This method will check whether the player already consume power star if it does
+	 * then it will add the PowerStarMoveAction into the action list or else it will
+	 * add the jump action to the action list.
+	 *
+	 * @param actor the Actor acting
+	 * @param location the current Location
+	 * @param direction the direction of the Ground from the Actor
+	 * @return an actionlist
+	 */
 	@Override
 	public ActionList allowableActions(Actor actor, Location location, String direction) {
 		ActionList actionList = new ActionList();

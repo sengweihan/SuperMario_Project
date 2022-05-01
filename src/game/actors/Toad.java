@@ -34,12 +34,31 @@ public class Toad extends Actor {
         sellerItem.put(600, new SuperMushroom());
     }
 
+    /**
+     * Toad is basically an actor which serves a purpose of selling items.Therefore it will not
+     * do anything throughout the whole game.
+     *
+     * @param actions    collection of possible Actions for this Actor
+     * @param lastAction The Action this Actor took last turn. Can do interesting things in conjunction with Action.getNextAction()
+     * @param map        the map containing the Actor
+     * @param display    the I/O object to which messages may be written
+     * @return an action
+     */
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
         return new DoNothingAction();
     }
 
 
+    /**
+     * This method will inform the player which actions they are allow to perform on when
+     * the player approaches the toad.
+     *
+     * @param otherActor the Actor that might be performing attack
+     * @param direction  String representing the direction of the other Actor
+     * @param map        current GameMap
+     * @return an actionlist
+     */
     @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actionsList = new ActionList();

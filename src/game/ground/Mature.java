@@ -63,6 +63,11 @@ public class Mature extends Tree implements Jumpable {
 
     }
 
+    /**
+     * A method used to print the string when the instance of this class is being called.
+     *
+     * @return a string
+     */
     public String toString(){
         return "Mature";
     }

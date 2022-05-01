@@ -70,6 +70,13 @@ public class Player extends Actor implements Resettable {
 		return menu.showMenu(this, actions, display);
 	}
 
+	/**
+	 * This method will check whether the player has the status of EFFECT_SUPERMUSHROOM. If it
+	 * does then the player's character will be converted into uppercase else it will remain as
+	 * lowercase.
+	 *
+	 * @return a char
+	 */
 	@Override
 	public char getDisplayChar(){
 		char out = this.hasCapability(Status.EFFECT_SUPER_MUSHROOM) ? Character.toUpperCase(super.getDisplayChar()): super.getDisplayChar();

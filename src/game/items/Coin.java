@@ -45,11 +45,23 @@ public class Coin extends Item implements Resettable, PickableCoin {
         return actor + " picked up $" + coinValue + " coin";
     }
 
+    /**
+     * This method does not allow player to drop this item.
+     *
+     * @param actor
+     * @return a DropItemAction
+     */
     @Override
     public DropItemAction getDropAction(Actor actor) {
         return null;
     }
 
+    /**
+     * This method does not allow player to pick up this item.
+     *
+     * @param actor
+     * @return a PickUpItemAction
+     */
     @Override
     public PickUpItemAction getPickUpAction(Actor actor) {
         return null;
