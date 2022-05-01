@@ -11,14 +11,14 @@ import game.actions.BuyAction;
 import game.items.PowerStar;
 import game.items.SuperMushroom;
 import game.weapon.Wrench;
-
-import java.util.HashMap;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class Toad extends Actor {
     /**
      * Hashmap is used to store respective items and its price for selling purposes.
      */
-    private HashMap<Item,Integer> sellerItem = new HashMap<>();
+    private Map<Integer,Item> sellerItem = new TreeMap<>();
 
     /**
      * Constructor.
@@ -29,9 +29,9 @@ public class Toad extends Actor {
      */
     public Toad(String name, char displayChar, int hitPoints) {
         super(name, displayChar, hitPoints);
-        sellerItem.put(new Wrench(),200);
-        sellerItem.put(new PowerStar(),600);
-        sellerItem.put(new SuperMushroom(),400);
+        sellerItem.put(200, new Wrench());
+        sellerItem.put(400, new SuperMushroom());
+        sellerItem.put(600, new SuperMushroom());
     }
 
     @Override
@@ -43,12 +43,17 @@ public class Toad extends Actor {
     @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actionsList = new ActionList();
-        for (Item item : sellerItem.keySet()){
-            actionsList.add(new BuyAction(item,sellerItem.get(item),item.toString()));
+        for (int item : sellerItem.keySet()){
+            if (item == 200){
+                actionsList.add(new BuyAction(new Wrench(),item,"Wrench"));
+            }
+            else if (item == 400){
+                actionsList.add(new BuyAction(new SuperMushroom(),item,"Super Mushroom"));
+            }
+            else if (item == 600){
+                actionsList.add(new BuyAction(new PowerStar(),item,"Power Star"));
+            }
         }
-
         return actionsList;
         }
-
-
 }

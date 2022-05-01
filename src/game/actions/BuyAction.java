@@ -26,7 +26,7 @@ public class BuyAction extends Action {
         if (actor.hasCapability(Status.BUYING) && WalletSystem.getWalletValue() > this.cost){
             actor.addItemToInventory(item);
             WalletSystem.subtractWalletValue(cost);
-            message += actor + " successfully bought " + this.item;
+            message += actor + " successfully bought " + this.name;
             return message;
 
         }
