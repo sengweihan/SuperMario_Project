@@ -2,8 +2,9 @@ package game.ground.fountains;
 
 import edu.monash.fit2099.engine.actors.Actor;
 import game.Status;
+import game.ground.fountains.FountainWater;
 
-public class PowerWater extends FountainWater{
+public class PowerWater extends FountainWater {
     @Override
     public void consumeWater(Actor actor) {
         actor.addCapability(Status.DRANK_POWER);

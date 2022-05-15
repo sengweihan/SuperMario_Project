@@ -1,6 +1,6 @@
 package game.ground.fountains;
 
-public class PowerFountains extends Fountains{
+public class PowerFountains extends Fountains {
     /**
      * Constructor.
      */
