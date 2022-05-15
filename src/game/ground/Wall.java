@@ -6,12 +6,13 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 import game.Status;
-import game.actions.JumpAction;
-import game.actions.PowerStarMoveAction;
+import game.actions.moveaction.FlyAction;
+import game.actions.moveaction.JumpAction;
+import game.actions.moveaction.PowerStarMoveAction;
+import game.interfaces.Flyable;
 import game.interfaces.Jumpable;
-import game.items.Coin;
 
-public class Wall extends Ground implements Jumpable {
+public class Wall extends Ground implements Jumpable, Flyable {
 
 	/**
 	 * A constructor.
@@ -87,8 +88,17 @@ public class Wall extends Ground implements Jumpable {
 		else if (!location.containsAnActor()){
 			actionList.add(new JumpAction(this,location,direction));
 		}
+		else if (actor.hasCapability(Status.FLYING) && !location.containsAnActor()){
+			actionList.add(new FlyAction(this, location, direction));
+		}
 
 		return actionList;
 
+	}
+
+	@Override
+	public String fly(Actor actor, GameMap map, Location location) {
+		map.moveActor(actor,location);
+		return actor + " flies to " + location;
 	}
 }

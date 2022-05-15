@@ -1,15 +1,11 @@
 package game.ground;
 
-import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import game.Status;
-import game.actions.JumpAction;
-import game.actions.PowerStarMoveAction;
 import game.enemies.Goomba;
 import game.interfaces.Jumpable;
-import game.items.Coin;
 
 /**
  * @author SENG WEI HAN

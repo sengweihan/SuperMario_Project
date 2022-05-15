@@ -7,7 +7,9 @@ import java.util.Random;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.*;
+import game.actors.PrincessPeach;
 import game.actors.Toad;
+import game.enemies.Bowser;
 import game.enemies.Goomba;
 import game.actors.Player;
 import game.ground.*;
@@ -110,6 +112,10 @@ public class Application {
 
 			}
 		}
+
+		PrincessPeach princessPeach = new PrincessPeach();
+		secondGameMap.addActor(princessPeach,secondGameMap.at(40,8));
+		secondGameMap.addActor(new Bowser(secondGameMap),secondGameMap.at(41,8));
 
 		world.run();
 

@@ -1,4 +1,4 @@
-package game.actions;
+package game.actions.attackaction;
 
 import java.util.Random;
 
@@ -70,7 +70,7 @@ public class AttackAction extends Action {
 
 		if (!target.isConscious()) {
 			if (actor.hasCapability(Status.IMMUNITY)){
-				if (target.getDisplayChar()=='K') {
+				if (target.hasCapability(Status.KOOP)) {
 					Location dropMushroom = map.locationOf(target);
 					dropMushroom.addItem(new SuperMushroom());
 				}
@@ -79,7 +79,7 @@ public class AttackAction extends Action {
 				result += System.lineSeparator() + target + " is killed.";
 			}
 			else {
-				if (target.getDisplayChar()=='K') {
+				if (target.hasCapability(Status.KOOP)) {
 					if (!target.hasCapability(Status.DORMANT)){
 						target.addCapability(Status.DORMANT);
 					}

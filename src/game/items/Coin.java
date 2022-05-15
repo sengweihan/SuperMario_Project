@@ -7,7 +7,7 @@ import edu.monash.fit2099.engine.items.PickUpItemAction;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.positions.NumberRange;
-import game.actions.PickUpCoinAction;
+import game.actions.coinaction.PickUpCoinAction;
 import game.interfaces.PickableCoin;
 import game.reset.Resettable;
 import game.systems.WalletSystem;

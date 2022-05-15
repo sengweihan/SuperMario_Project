@@ -1,24 +1,19 @@
-package game.actions;
+package game.actions.coinaction;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
-import edu.monash.fit2099.engine.positions.Location;
-import game.interfaces.Jumpable;
+import game.interfaces.PickableCoin;
 
-public class JumpAction extends Action {
-    private Jumpable jumpable;
-    private Location jumpLocation;
-    private String direction;
+public class PickUpCoinAction extends Action {
+    private PickableCoin pickableCoin;
 
-    public JumpAction(Jumpable jumpable, Location moveToLocation, String direction){
-        this.jumpable = jumpable;
-        this.jumpLocation = moveToLocation;
-        this.direction = direction;
+    public PickUpCoinAction(PickableCoin pickableCoin){
+        this.pickableCoin = pickableCoin;
     }
 
     /**
-     * This method will call the jumpable instance's jump method and execute them
+     * This method will call the pickableCoin instance's pickableCoin method and execute them.
      *
      * @param actor The actor performing the action.
      * @param map The map the actor is on.
@@ -26,8 +21,9 @@ public class JumpAction extends Action {
      */
     @Override
     public String execute(Actor actor, GameMap map) {
-        return jumpable.jump(actor,map,jumpLocation);
+        return pickableCoin.pickableCoin(actor,map);
     }
+
 
     /**
      * This method will be display in the console to allow player to select that particular action
@@ -38,6 +34,6 @@ public class JumpAction extends Action {
      */
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " jumps to the " + direction + " " + jumpable;
+        return actor + " picks up the " + pickableCoin;
     }
 }

@@ -1,4 +1,4 @@
-package game.actions;
+package game.actions.attackaction;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
@@ -7,6 +7,7 @@ import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.Weapon;
 import game.Status;
+import game.items.Fire;
 
 import java.util.Random;
 /**
@@ -69,6 +70,12 @@ public class NPCAttackAction extends Action {
             if (target.hasCapability(Status.EFFECT_SUPER_MUSHROOM)){
                 target.removeCapability(Status.EFFECT_SUPER_MUSHROOM);
                 result += System.lineSeparator() + target + "'s Super Mushroom effect has been removed!";
+            }
+        }
+        //changes
+        if (actor.hasCapability(Status.FINAL_BOSS)){
+            if (!map.locationOf(target).getGround().hasCapability(Status.BURN)){
+                map.locationOf(target).addItem(new Fire());
             }
         }
 

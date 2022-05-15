@@ -12,5 +12,11 @@ public enum Status {
     IMMUNITY, // use this status when the player consumes magical star, lasts for 10 turns
     DORMANT,
     BUYING, // use this status to tell which actor can buys item from toad.
-    BURN, // LAVA GROUND WILL HAVE THIS STATUS AND WHEN PLAYER STEPS ON IT , IT WILL GET INFLICTED CERTAIN AMOUNT OF DAMAGE.
+    DRANK_POWER,
+    KOOP,
+    HAS_BOTTLE,
+    FINAL_BOSS,
+    WIN_GAME,
+    FLYING,
+    BURN,
 }

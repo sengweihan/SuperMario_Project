@@ -2,7 +2,7 @@ package game.items;
 
 import edu.monash.fit2099.engine.actors.Actor;
 import game.Status;
-import game.actions.ConsumeSuperMushroomAction;
+import game.actions.consumeaction.ConsumeSuperMushroomAction;
 
 public class SuperMushroom extends ConsumableItems {
     /***

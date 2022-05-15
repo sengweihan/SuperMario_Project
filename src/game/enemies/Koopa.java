@@ -7,19 +7,24 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.Status;
-import game.actions.DestroyShellAction;
-import game.actions.DormantAction;
-
+import game.actions.enemiesaction.DestroyShellAction;
+import game.actions.enemiesaction.DormantAction;
 /**
  * an enemy that has a shell
  */
-public class Koopa extends Enemies {
+public abstract class Koopa extends Enemies {
+
 
     /**
      * Constructor.
+     *
+     * @param name        the name of the Actor
+     * @param displayChar the character that will represent the Actor in the display
+     * @param hitPoints   the Actor's starting hit points
      */
-    public Koopa() {
-        super("Koopa", 'K', 100);
+    public Koopa(String name, char displayChar, int hitPoints) {
+        super(name, displayChar, hitPoints);
+        this.addCapability(Status.KOOP);
     }
 
     protected IntrinsicWeapon getIntrinsicWeapon() {
@@ -41,7 +46,7 @@ public class Koopa extends Enemies {
         // it can be attacked only by the HOSTILE opponent, and this action will not attack the HOSTILE enemy back.
         if (this.hasCapability(Status.DORMANT) && (otherActor.getInventory().contains(otherActor.getWeapon()))){
             ActionList actions = new ActionList();
-            actions.clear();
+//            actions.clear();
             actions.add(new DestroyShellAction(this,direction));
             this.behaviours.clear();
             return actions;

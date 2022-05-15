@@ -6,7 +6,7 @@ import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import game.Status;
-import game.actions.NPCAttackAction;
+import game.actions.attackaction.NPCAttackAction;
 
 /**
  * a class that allows the Enemies to attack the player automatically
