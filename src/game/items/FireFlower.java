@@ -3,7 +3,7 @@ package game.items;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Location;
 import game.Status;
-import game.actions.ConsumeFireFlower;
+import game.actions.consumeaction.ConsumeFireFlower;
 
 public class FireFlower extends ConsumableItems {
 

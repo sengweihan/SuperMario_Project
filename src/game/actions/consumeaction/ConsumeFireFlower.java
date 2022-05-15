@@ -1,4 +1,4 @@
-package game.actions;
+package game.actions.consumeaction;
 
 
 import edu.monash.fit2099.engine.actors.Actor;
@@ -6,7 +6,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import game.Status;
 import game.items.ConsumableItems;
 
-public class ConsumeFireFlower extends ConsumeItemAction {
+public class ConsumeFireFlower extends ConsumeItemAction{
 
 
     public ConsumeFireFlower(ConsumableItems item) {
