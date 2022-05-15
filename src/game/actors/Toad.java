@@ -7,6 +7,8 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
+import game.Status;
+import game.actions.GetBottleAction;
 import game.actions.coinaction.BuyAction;
 import game.items.PowerStar;
 import game.items.SuperMushroom;
@@ -72,6 +74,10 @@ public class Toad extends Actor {
             else if (item == 600){
                 actionsList.add(new BuyAction(new PowerStar(),item,"Power Star"));
             }
+        }
+        if (!otherActor.hasCapability(Status.HAS_BOTTLE)){
+            otherActor.addCapability(Status.HAS_BOTTLE);
+            actionsList.add(new GetBottleAction());
         }
         return actionsList;
         }

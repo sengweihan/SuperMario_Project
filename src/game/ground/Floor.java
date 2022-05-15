@@ -28,6 +28,9 @@ public class Floor extends Ground implements Flyable {
 		if (actor.hasCapability(Status.HOSTILE_TO_ENEMY)){
 			return true;
 		}
+		else if (actor.hasCapability(Status.FLYING)){
+			return true;
+		}
 		return false;
 	}
 
