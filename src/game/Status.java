@@ -19,4 +19,6 @@ public enum Status {
     WIN_GAME,
     FLYING,
     BURN,
+    FIRE_ATTACK,
+
 }

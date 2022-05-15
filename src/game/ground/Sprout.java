@@ -1,11 +1,15 @@
 package game.ground;
 
+import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import game.Status;
+
 import game.enemies.Goomba;
 import game.interfaces.Jumpable;
+import game.items.Coin;
+import game.items.FireFlower;
 
 /**
  * @author SENG WEI HAN
@@ -14,6 +18,7 @@ import game.interfaces.Jumpable;
 public class Sprout extends Tree implements Jumpable {
     private int counter;
     private static final double CHANCE_SPAWN_GOOMBA = 0.1;
+    private static final double CHANCE_SPAWN_FIRE_FLOWER = 0.5;
 
     public Sprout(){
         super('+');
@@ -42,6 +47,10 @@ public class Sprout extends Tree implements Jumpable {
         if (Math.random() <= CHANCE_SPAWN_GOOMBA && !location.containsAnActor()){
             location.addActor(new Goomba());
 
+        }
+
+        if (Math.random() <= CHANCE_SPAWN_FIRE_FLOWER){
+            location.addItem(new FireFlower());
         }
     }
 

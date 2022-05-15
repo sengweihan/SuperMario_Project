@@ -2,36 +2,64 @@ package game.items;
 
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
+import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import game.Status;
+import game.interfaces.Burning;
 
-public class Fire extends Item {
-    private int tick;
+public class Fire extends Item implements Burning {
+    private int counter;
+    private static final int FIRE_DAMAGE = 20;
 
-    /**
-     * Constructor.
-     */
     public Fire() {
         super("Fire",'v',false);
-        tick = 3;
-        this.addCapability(Status.BURN);
     }
+
 
     @Override
     public void tick(Location location) {
-        if (tick!= 0){
-            tick--;
-        }
-        else {
-            // fire so strong it burns down everything
+        counter += 1;
+        /**
+         * This fire item lasts only for 3 rounds.
+         */
+        if (counter % 3 == 0){
             location.removeItem(this);
         }
-
-        Actor actor = location.getActor();
-        if (location.containsAnActor()){
-            if (!actor.hasCapability(Status.IMMUNITY) && !actor.hasCapability(Status.FLYING)){
-                actor.hurt(20);
+        else{
+            /**
+             * For every subsequent turn after the existence of fire item, it will continuously
+             * burn those actors who step into the ground that contain this item and this
+             * will last until the item is completely destroy.
+             */
+            if (location.containsAnActor() && !location.getActor().hasCapability(Status.IMMUNITY)){
+                location.getActor().hurt(FIRE_DAMAGE);
             }
         }
+
+
     }
+
+
+    @Override
+    public String burn(Actor target, GameMap map) {
+        map.locationOf(target).addItem(this);
+        target.hurt(FIRE_DAMAGE);
+
+        /**
+         *  if the target (enemies) hit point < 0 then it shall be remove from the current map.
+         */
+        if (!target.isConscious()){
+            map.removeActor(target);
+            return target + " is removed from the map due to extreme fire burning! ";
+
+
+        }
+        return  target + " burnt with a damage of " + FIRE_DAMAGE + "!";
+
+
+    }
+
+
+
+
 }
