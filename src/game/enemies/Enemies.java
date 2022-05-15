@@ -11,10 +11,12 @@ import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.Status;
 import game.actions.AttackAction;
+import game.actions.FireAttackAction;
 import game.behaviours.AttackBehaviour;
 import game.behaviours.Behaviour;
 import game.behaviours.FollowBehaviour;
 import game.behaviours.WanderBehaviour;
+import game.items.Fire;
 import game.reset.Resettable;
 
 import java.util.Map;
@@ -67,8 +69,12 @@ public abstract class Enemies extends Actor implements Resettable {
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions = new ActionList();
         // it can be attacked only by the HOSTILE opponent, and this action will not attack the HOSTILE enemy back.
-        if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY) && this.isConscious()) {
+        if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY) && this.isConscious() && !otherActor.hasCapability(Status.FIRE_ATTACK)) {
             actions.add(new AttackAction(this,direction));
+        }
+
+        else if (otherActor.hasCapability(Status.HOSTILE_TO_ENEMY) && this.isConscious() && otherActor.hasCapability(Status.FIRE_ATTACK)){
+            actions.add(new FireAttackAction(this,direction,new Fire()));
         }
         return actions;
     }

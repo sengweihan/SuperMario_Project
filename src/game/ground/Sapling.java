@@ -8,10 +8,12 @@ import game.Status;
 import game.actions.JumpAction;
 import game.interfaces.Jumpable;
 import game.items.Coin;
+import game.items.FireFlower;
 
 public class Sapling extends Tree implements Jumpable {
     private int counter ;
     private static  final double CHANCE_SPAWN_COIN = 0.1;
+    private static  final double CHANCE_SPAWN_FIRE_FLOWER = 0.5;
 
     /**
      * Constructor.
@@ -43,6 +45,10 @@ public class Sapling extends Tree implements Jumpable {
 
         if (Math.random() <= CHANCE_SPAWN_COIN){
             location.addItem(new Coin(20,"Coin($20)"));
+        }
+
+        if (Math.random() <= CHANCE_SPAWN_FIRE_FLOWER){
+            location.addItem(new FireFlower());
         }
 
 

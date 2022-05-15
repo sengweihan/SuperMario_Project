@@ -20,6 +20,8 @@ public class Player extends Actor implements Resettable {
 
 	private final Menu menu = new Menu();
 	protected int tick = 0;
+	protected int secondTick = 0;
+	protected  final int FIRE_PLANT_COUNT = 20;
 	protected final int TICK_COUNT = 10;
 	protected final static int INITIAL_WALLET_VALUE = 1300;
 	public int walletValue ;
@@ -53,6 +55,19 @@ public class Player extends Actor implements Resettable {
 			this.removeCapability(Status.IMMUNITY);
 			display.println("IMMUNITY effect has worn off!");
 		}
+
+		if (secondTick < FIRE_PLANT_COUNT && this.hasCapability(Status.FIRE_ATTACK)){
+			secondTick ++;
+			display.println("MARIO IS RAGING");
+		}
+
+		else if (this.hasCapability(Status.FIRE_ATTACK)){
+			secondTick = 0;
+			this.removeCapability(Status.FIRE_ATTACK);
+			display.println("FIRE ATTACK EFFECT HAS WORN OFF!");
+		}
+
+
 
 
 		ResetManager resetManager = ResetManager.getInstance();

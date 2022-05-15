@@ -13,4 +13,5 @@ public enum Status {
     DORMANT,
     BUYING, // use this status to tell which actor can buys item from toad.
     BURN, // LAVA GROUND WILL HAVE THIS STATUS AND WHEN PLAYER STEPS ON IT , IT WILL GET INFLICTED CERTAIN AMOUNT OF DAMAGE.
+    FIRE_ATTACK, // when player consume fire flower it will obtain this capability.
 }
