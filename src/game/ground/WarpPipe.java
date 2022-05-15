@@ -7,9 +7,9 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 import game.Status;
-import game.actions.JumpAction;
-import game.actions.PowerStarMoveAction;
-import game.actions.TeleportAction;
+import game.actions.moveaction.JumpAction;
+import game.actions.moveaction.PowerStarMoveAction;
+import game.actions.moveaction.TeleportAction;
 import game.enemies.PiranhaPlant;
 import game.interfaces.Jumpable;
 

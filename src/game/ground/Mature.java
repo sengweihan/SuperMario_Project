@@ -1,13 +1,12 @@
 package game.ground;
 
-import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import game.Status;
-import game.actions.JumpAction;
-import game.enemies.Koopa;
+import game.enemies.FlyingKoopa;
+import game.enemies.NormalKoopa;
 import game.interfaces.Jumpable;
 
 import java.util.List;
@@ -54,7 +53,13 @@ public class Mature extends Tree implements Jumpable {
         }
 
         if (Math.random() <= CHANCE_SPAWN_KOOPA && !location.containsAnActor()){
-            location.addActor(new Koopa());
+            double spawn_random = 0.5;
+            if (Math.random() <= spawn_random){
+                location.addActor(new NormalKoopa());
+            }
+            else {
+                location.addActor(new FlyingKoopa());
+            }
         }
 
         if (Math.random() <= 0.2){

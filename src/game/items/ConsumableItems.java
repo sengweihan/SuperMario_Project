@@ -3,7 +3,6 @@ package game.items;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.DropItemAction;
 import edu.monash.fit2099.engine.items.Item;
-import game.actions.ConsumePowerStarAction;
 
 /**
  * Base class for ConsumeableItems. These represent items that can be consumed by the actor

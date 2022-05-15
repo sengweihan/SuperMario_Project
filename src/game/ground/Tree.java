@@ -7,14 +7,16 @@ import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.positions.NumberRange;
 import game.Status;
-import game.actions.JumpAction;
-import game.actions.PowerStarMoveAction;
+import game.actions.moveaction.FlyAction;
+import game.actions.moveaction.JumpAction;
+import game.actions.moveaction.PowerStarMoveAction;
+import game.interfaces.Flyable;
 import game.interfaces.Jumpable;
 import game.reset.Resettable;
 
 import java.util.Random;
 
-public abstract class Tree extends Ground implements Resettable, Jumpable {
+public abstract class Tree extends Ground implements Resettable, Jumpable, Flyable {
     protected Random rand = new Random();
     protected final int removed = 5;
     /**
@@ -56,9 +58,17 @@ public abstract class Tree extends Ground implements Resettable, Jumpable {
         else if (!location.containsAnActor()){
             actionList.add(new JumpAction(this,location,direction));
         }
-
+        else if (actor.hasCapability(Status.FLYING) && !location.containsAnActor()){
+            actionList.add(new FlyAction(this, location, direction));
+        }
         return actionList;
 
+    }
+
+    @Override
+    public String fly(Actor actor, GameMap map, Location location) {
+        map.moveActor(actor,location);
+        return actor + " flies to " + location;
     }
 
     @Override

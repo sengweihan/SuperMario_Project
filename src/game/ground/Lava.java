@@ -5,7 +5,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 import game.Status;
-import game.actions.LavaMoveAction;
+import game.actions.moveaction.LavaMoveAction;
 
 public class Lava extends Ground {
     /**
@@ -28,6 +28,13 @@ public class Lava extends Ground {
         return false;
     }
 
+    @Override
+    public void tick(Location location) {
+        Actor actor = location.getActor();
+        if (location.containsAnActor() && actor.hasCapability(Status.HOSTILE_TO_ENEMY)){
+            actor.hurt(15);
+        }
+    }
 
     @Override
     public ActionList allowableActions(Actor actor, Location location, String direction) {
