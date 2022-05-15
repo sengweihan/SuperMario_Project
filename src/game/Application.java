@@ -2,13 +2,11 @@ package game;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
-import edu.monash.fit2099.engine.positions.FancyGroundFactory;
-import edu.monash.fit2099.engine.positions.GameMap;
-import edu.monash.fit2099.engine.positions.Location;
-import edu.monash.fit2099.engine.positions.World;
+import edu.monash.fit2099.engine.positions.*;
 import game.actors.Toad;
 import game.enemies.Goomba;
 import game.actors.Player;
@@ -23,6 +21,7 @@ import game.items.SuperMushroom;
 public class Application {
 
 	public static void main(String[] args) {
+		Random rand  = new Random();
 
 		World world = new World(new Display());
 
@@ -82,13 +81,35 @@ public class Application {
 
 
 		Actor mario = new Player("Mario", 'm', 100);
-		world.addPlayer(mario, gameMap.at(42, 10));
+		world.addPlayer(mario, gameMap.at(1, 0));
 
 		Actor toad = new Toad("MR.TOAD",'O',999);
 		gameMap.addActor(toad,gameMap.at(44,11));
 
 		gameMap.locationOf(mario).addItem(new PowerStar());
 		gameMap.locationOf(mario).addItem(new SuperMushroom());
+
+		secondGameMap.at(0,0).setGround(new WarpPipe(0,0,gameMap));
+		gameMap.at(0,0).setGround(new WarpPipe(0,0,secondGameMap));
+
+		NumberRange x = secondGameMap.getXRange();
+		NumberRange y = secondGameMap.getYRange();
+
+		int randomX;
+		int randomY;
+
+
+		for (int i =0 ; i<5; i++){ // 5 portals at both maps
+			randomX = rand.nextInt(x.max());
+			randomY = rand.nextInt(y.max());
+			Location firstLocation = gameMap.at(randomX,randomY);
+			Location secondLocation = secondGameMap.at(randomX,randomY);
+			if (firstLocation.getGround().hasCapability(Status.FERTILE) && secondLocation.getGround().hasCapability(Status.FERTILE)){
+				firstLocation.setGround(new WarpPipe(randomX,randomY,secondGameMap));
+				secondLocation.setGround(new WarpPipe(randomX,randomY,gameMap));
+
+			}
+		}
 
 		world.run();
 
