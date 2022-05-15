@@ -31,7 +31,7 @@ public class Fire extends Item implements Burning {
              * burn those actors who step into the ground that contain this item and this
              * will last until the item is completely destroy.
              */
-            if (location.containsAnActor() && !location.getActor().hasCapability(Status.IMMUNITY)){
+            if (location.containsAnActor() && !location.getActor().hasCapability(Status.IMMUNITY) && !location.getActor().hasCapability(Status.FLYING)){
                 location.getActor().hurt(FIRE_DAMAGE);
             }
         }
