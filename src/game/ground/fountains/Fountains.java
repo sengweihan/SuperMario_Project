@@ -29,7 +29,7 @@ public abstract class Fountains extends Ground implements Drinkable {
     public ActionList allowableActions(Actor actor, Location location, String direction) {
         ActionList actions = new ActionList();
         if (drinkCount != 0 && !refilling){
-            if (actor.hasCapability(Status.HOSTILE_TO_ENEMY) && actor.hasCapability(Status.HAS_BOTTLE)) {
+            if (location.getActor() != null && actor.hasCapability(Status.HOSTILE_TO_ENEMY) && actor.hasCapability(Status.HAS_BOTTLE)) {
                 actions.add(new FillBottleAction(this, water));
             }
         }

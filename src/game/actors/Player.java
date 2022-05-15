@@ -7,6 +7,7 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
 import edu.monash.fit2099.engine.positions.Location;
+import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.Status;
 import game.actions.ResetAction;
 import game.actions.fountainaction.DrinkBottleAction;
@@ -104,6 +105,11 @@ public class Player extends Actor implements Resettable, DrinkPowerCount {
 	public char getDisplayChar(){
 		char out = this.hasCapability(Status.EFFECT_SUPER_MUSHROOM) ? Character.toUpperCase(super.getDisplayChar()): super.getDisplayChar();
 		return out;
+	}
+
+	@Override
+	protected IntrinsicWeapon getIntrinsicWeapon() {
+		return new IntrinsicWeapon(5 + drinkCount*15,"punches");
 	}
 
 	@Override
