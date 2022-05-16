@@ -50,9 +50,6 @@ public class PiranhaPlant extends Enemies {
         if (this.isConscious()){
             this.increaseMaxHp(50);
         }
-        else {
-            map.removeActor(this);
-        }
     }
 
 }

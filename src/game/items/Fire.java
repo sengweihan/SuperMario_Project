@@ -33,6 +33,10 @@ public class Fire extends Item implements Burning {
              */
             if (location.containsAnActor() && !location.getActor().hasCapability(Status.IMMUNITY) && !location.getActor().hasCapability(Status.FLYING)){
                 location.getActor().hurt(FIRE_DAMAGE);
+                if (!location.getActor().isConscious()){
+                    GameMap map = location.map();
+                    map.removeActor(location.getActor());
+                }
             }
         }
 

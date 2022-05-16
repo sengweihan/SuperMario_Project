@@ -2,6 +2,7 @@ package game.actors;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
+import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
@@ -50,55 +51,51 @@ public class Player extends Actor implements Resettable, DrinkPowerCount {
 
 	@Override
 	public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
-		if (!this.isConscious())
-			map.removeActor(this);
-		else {
-			// check the buff after drinking power water
-			if (this.hasCapability(Status.DRANK_POWER)){
-				drinkPowerWaterCount();
-				this.removeCapability(Status.DRANK_POWER);
-			}
+		// check the buff after drinking power water
+		if (this.hasCapability(Status.DRANK_POWER)){
+			drinkPowerWaterCount();
+			this.removeCapability(Status.DRANK_POWER);
+		}
 
-			// check if player bottle has water, if yes give DrinkAction
-			if (this.hasCapability(Status.HAS_BOTTLE)){
-				if (Bottle.getWaterTypeLength() > 0){
-					actions.add(new DrinkBottleAction());
-				}
+		// check if player bottle has water, if yes give DrinkAction
+		if (this.hasCapability(Status.HAS_BOTTLE)){
+			if (Bottle.getWaterTypeLength() > 0){
+				actions.add(new DrinkBottleAction());
 			}
+		}
 
-			// power star remaining turns
-			if (tick<TICK_COUNT && this.hasCapability(Status.IMMUNITY)){
-				tick++;
-				display.println("MARIO IS INVINCIBLE!");
-			}
-			else if (this.hasCapability(Status.IMMUNITY)){
-				tick = 0;
-				this.removeCapability(Status.IMMUNITY);
-				display.println("IMMUNITY effect has worn off!");
-			}
+		// power star remaining turns
+		if (tick<TICK_COUNT && this.hasCapability(Status.IMMUNITY)){
+			tick++;
+			display.println("MARIO IS INVINCIBLE!");
+		}
+		else if (this.hasCapability(Status.IMMUNITY)){
+			tick = 0;
+			this.removeCapability(Status.IMMUNITY);
+			display.println("IMMUNITY effect has worn off!");
+		}
 
 
-			if (secondTick < FIRE_FLOWER_TICK && this.hasCapability(Status.FIRE_ATTACK)){
-				secondTick ++;
-				display.println("MARIO IS RAGING");
-			}
-			else if (this.hasCapability(Status.FIRE_ATTACK)){
-				secondTick = 0;
-				this.removeCapability(Status.FIRE_ATTACK);
-				display.println("FIRE ATTACK EFFECT HAS WORK OFF!");
-			}
+		if (secondTick < FIRE_FLOWER_TICK && this.hasCapability(Status.FIRE_ATTACK)){
+			secondTick ++;
+			display.println("MARIO IS RAGING");
+		}
+		else if (this.hasCapability(Status.FIRE_ATTACK)){
+			secondTick = 0;
+			this.removeCapability(Status.FIRE_ATTACK);
+			display.println("FIRE ATTACK EFFECT HAS WORK OFF!");
+		}
 
-			// once-off reset action
-			ResetManager resetManager = ResetManager.getInstance();
-			if (!resetManager.getHasReset()){
-				actions.add(new ResetAction());
+		// once-off reset action
+		ResetManager resetManager = ResetManager.getInstance();
+		if (!resetManager.getHasReset()){
+			actions.add(new ResetAction());
 
-			}
+		}
 
-			// Handle multi-turn Actions
-			if (lastAction.getNextAction() != null){
-				return lastAction.getNextAction();
-			}
+		// Handle multi-turn Actions
+		if (lastAction.getNextAction() != null){
+			return lastAction.getNextAction();
 		}
 		Location actorCurrentLocation = map.locationOf(this);
 		// return/print the console menu
