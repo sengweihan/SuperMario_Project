@@ -29,13 +29,6 @@ public class Lava extends Ground {
         return false;
     }
 
-    @Override
-    public void tick(Location location) {
-        Actor actor = location.getActor();
-        if (location.containsAnActor() && actor.hasCapability(Status.HOSTILE_TO_ENEMY)){
-            actor.hurt(15);
-        }
-    }
 
     @Override
     public ActionList allowableActions(Actor actor, Location location, String direction) {
