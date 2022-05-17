@@ -11,6 +11,6 @@ public class HealthFountains extends Fountains {
 
     @Override
     public String toString() {
-        return "Health Fountain (" + drinkCount + "/10)";
+        return "Health Fountain (" + waterCount + "/10)";
     }
 }

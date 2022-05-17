@@ -10,6 +10,6 @@ public class PowerFountains extends Fountains {
 
     @Override
     public String toString() {
-        return "Power Fountain (" + drinkCount + "/10)";
+        return "Power Fountain (" + waterCount + "/10)";
     }
 }

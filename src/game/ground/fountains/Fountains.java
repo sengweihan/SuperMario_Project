@@ -6,11 +6,10 @@ import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 import game.Status;
 import game.actions.fountainaction.FillBottleAction;
-import game.ground.fountains.FountainWater;
 import game.interfaces.Drinkable;
 
 public abstract class Fountains extends Ground implements Drinkable {
-    protected int drinkCount;
+    protected int waterCount;
     protected int refillCount;
     protected boolean refilling;
     protected FountainWater water;
@@ -21,7 +20,7 @@ public abstract class Fountains extends Ground implements Drinkable {
      */
     public Fountains(char displayChar,FountainWater fountainWater) {
         super(displayChar);
-        drinkCount = 10;
+        waterCount = 10;
         refillCount = 0;
         water = fountainWater;
     }
@@ -29,7 +28,7 @@ public abstract class Fountains extends Ground implements Drinkable {
     @Override
     public ActionList allowableActions(Actor actor, Location location, String direction) {
         ActionList actions = new ActionList();
-        if (drinkCount != 0 && !refilling){
+        if (waterCount != 0 && !refilling){
             if (location.getActor() != null && actor.hasCapability(Status.HOSTILE_TO_ENEMY) && actor.hasCapability(Status.HAS_BOTTLE)) {
                 actions.add(new FillBottleAction(this, water));
             }
@@ -41,13 +40,13 @@ public abstract class Fountains extends Ground implements Drinkable {
         else {
             refilling = false;
             refillCount = 0;
-            drinkCount = 10;
+            waterCount = 10;
         }
         return actions;
     }
 
-    public void reduceCountByRefilling() {
-        drinkCount--;
+    public void reduceCountByFilling() {
+        waterCount = waterCount - 2;
     }
 
     @Override
