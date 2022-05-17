@@ -2,19 +2,18 @@ package game.enemies;
 
 import edu.monash.fit2099.engine.actions.MoveActorAction;
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.Status;
 
 public class Bowser extends Enemies {
-    private GameMap secondMap;
     /**
      * Constructor.
      */
-    public Bowser (GameMap secondGameMap) {
+    public Bowser () {
         super("Bowser", 'B', 500);
         this.behaviours.clear();
         this.addCapability(Status.FINAL_BOSS);
-        secondMap = secondGameMap;
     }
 
     @Override
@@ -24,11 +23,8 @@ public class Bowser extends Enemies {
 
     @Override
     public void resetInstance(GameMap map) {
-        if (this.isConscious()){
-            this.heal(500);
-            this.behaviours.clear();
-            MoveActorAction defaultLocation = new MoveActorAction(secondMap.at(41,8),"","");
-            defaultLocation.execute(this,secondMap);
-        }
+        this.heal(500);
+        map.removeActor(this);
+        map.at(41,8).addActor(this);
     }
 }

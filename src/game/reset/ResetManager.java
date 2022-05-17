@@ -18,6 +18,7 @@ public class ResetManager {
      * such as Player implements Resettable will be stored in here)
      */
     private List<Resettable> resettableList;
+    private List<GameMap> allMap;
 
     /**
      * A singleton reset manager instance
@@ -37,11 +38,16 @@ public class ResetManager {
         return instance;
     }
 
+    public void addMap(GameMap map){
+        allMap.add(map);
+    }
+
     /**
      * Constructor
      */
     private ResetManager(){
         resettableList = new ArrayList<>();
+        allMap = new ArrayList<>();
         hasReset = false;
     }
 
@@ -53,12 +59,12 @@ public class ResetManager {
      * Reset the game by traversing through all the list
      * By doing this way, it will avoid using `instanceof` all over the place.
      *
-     * @param map the current game map the actor is in
      */
-    public void run(GameMap map){
+    public void run(){
         for (Resettable reset: resettableList){
-            reset.resetInstance(map);
-            cleanUp(reset);
+            for (GameMap map : allMap){
+                reset.resetInstance(map);
+            }
         }
         hasReset = true;
     }

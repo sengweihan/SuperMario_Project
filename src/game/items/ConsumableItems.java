@@ -3,11 +3,15 @@ package game.items;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.DropItemAction;
 import edu.monash.fit2099.engine.items.Item;
+import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.positions.Location;
+import edu.monash.fit2099.engine.positions.NumberRange;
+import game.reset.Resettable;
 
 /**
  * Base class for ConsumeableItems. These represent items that can be consumed by the actor
  */
-public abstract class ConsumableItems extends Item {
+public abstract class ConsumableItems extends Item implements Resettable {
     /***
      * Constructor.
      *  @param name the name of this Item
@@ -16,6 +20,7 @@ public abstract class ConsumableItems extends Item {
      */
     public ConsumableItems(String name, char displayChar, boolean portable) {
         super(name, displayChar, portable);
+
     }
 
     /**
@@ -35,4 +40,18 @@ public abstract class ConsumableItems extends Item {
      * @param actor the actor that consumes the item
      */
     public abstract void consumeItem(Actor actor);
+
+    @Override
+    public void resetInstance(GameMap map) {
+        NumberRange x = map.getXRange();
+        NumberRange y = map.getYRange();
+        for (int i : x){
+            for (int j : y){
+                Location here = map.at(i,j);
+                if (here.getItems().contains(this)){
+                    here.removeItem(this);
+                }
+            }
+        }
+    }
 }

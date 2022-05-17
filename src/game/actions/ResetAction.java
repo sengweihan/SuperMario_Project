@@ -30,7 +30,7 @@ public class ResetAction extends Action {
      */
     @Override
     public String execute(Actor actor, GameMap map) {
-        resetManager.run(map);
+        resetManager.run();
         return actor + " has reset the game!";
     }
 

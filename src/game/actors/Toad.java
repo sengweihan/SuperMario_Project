@@ -76,7 +76,6 @@ public class Toad extends Actor {
             }
         }
         if (!otherActor.hasCapability(Status.HAS_BOTTLE)){
-            otherActor.addCapability(Status.HAS_BOTTLE);
             actionsList.add(new GetBottleAction());
         }
         return actionsList;
