@@ -21,7 +21,7 @@ public class FillBottleAction extends Action {
     public String execute(Actor actor, GameMap map) {
         fountains.reduceCountByFilling();
         Bottle.addWater(fountainWater);
-        return actor + " refill Health water";
+        return actor + " refill " + fountainWater;
     }
 
     @Override
