@@ -46,30 +46,12 @@ public abstract class Fountains extends Ground implements Drinkable {
         return actions;
     }
 
-
-    @Override
-    public void tick(Location location) {
-        super.tick(location);
-    }
-
-    public void reduceCount(){
-        drinkCount = drinkCount - 5;
-    }
-
     public void reduceCountByRefilling() {
         drinkCount--;
     }
 
-    public FountainWater getWater(){
-        return water;
-    }
-
     @Override
-    public void drinkFromFountain(Actor actor) {
+    public void consumeWater(Actor actor) {
         water.consumeWater(actor);
-    }
-
-    public int getDrinkCount(){
-        return drinkCount;
     }
 }
