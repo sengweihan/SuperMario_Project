@@ -8,7 +8,7 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.Status;
-import game.actions.GetBottleAction;
+import game.actions.bottleaction.GetBottleAction;
 import game.actions.coinaction.BuyAction;
 import game.items.PowerStar;
 import game.items.SuperMushroom;

@@ -2,7 +2,6 @@ package game.actors;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
-import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
@@ -11,8 +10,8 @@ import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.Status;
 import game.actions.ResetAction;
-import game.actions.fountainaction.DrinkBottleAction;
-import game.actions.fountainaction.DrinkPowerCount;
+import game.actions.bottleaction.DrinkBottleAction;
+import game.actions.bottleaction.DrinkPowerCount;
 import game.items.Bottle;
 import game.reset.ResetManager;
 import game.reset.Resettable;

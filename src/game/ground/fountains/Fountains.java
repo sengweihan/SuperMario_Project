@@ -5,7 +5,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 import game.Status;
-import game.actions.fountainaction.FillBottleAction;
+import game.actions.bottleaction.FillBottleAction;
 import game.interfaces.Drinkable;
 
 public abstract class Fountains extends Ground implements Drinkable {
