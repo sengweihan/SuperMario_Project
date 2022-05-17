@@ -11,6 +11,7 @@ import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.Weapon;
 import game.Status;
 import game.enemies.Enemies;
+import game.items.Key;
 import game.items.SuperMushroom;
 
 /**
@@ -74,9 +75,6 @@ public class AttackAction extends Action {
 					Location dropMushroom = map.locationOf(target);
 					dropMushroom.addItem(new SuperMushroom());
 				}
-				// remove actor
-				map.removeActor(target);
-				result += System.lineSeparator() + target + " is killed.";
 			}
 			else {
 				if (target.hasCapability(Status.KOOP)) {
@@ -84,13 +82,15 @@ public class AttackAction extends Action {
 						target.addCapability(Status.DORMANT);
 					}
 				}
-				else {
-					// remove actor
-					map.removeActor(target);
-					result += System.lineSeparator() + target + " is killed.";
-				}
 			}
+			if (target.hasCapability(Status.FINAL_BOSS)){
+				Location dropKey = map.locationOf(target);
+				dropKey.addItem(new Key());
+			}
+			map.removeActor(target);
+			result += System.lineSeparator() + target + " is killed.";
 		}
+
 		return result;
 	}
 
