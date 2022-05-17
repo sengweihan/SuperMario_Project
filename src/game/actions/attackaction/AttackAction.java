@@ -87,8 +87,10 @@ public class AttackAction extends Action {
 				Location dropKey = map.locationOf(target);
 				dropKey.addItem(new Key());
 			}
-			map.removeActor(target);
-			result += System.lineSeparator() + target + " is killed.";
+			if (!target.hasCapability(Status.DORMANT)){
+				map.removeActor(target);
+				result += System.lineSeparator() + target + " is killed.";
+			}
 		}
 
 		return result;

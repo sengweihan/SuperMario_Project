@@ -65,6 +65,7 @@ public abstract class Koopa extends Enemies {
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
         if (this.hasCapability(Status.DORMANT)) {
             this.setDisplayChar('D');
+            this.behaviours.clear();
             return new DormantAction();
         }
         else{
