@@ -20,7 +20,7 @@ public abstract class ConsumableItems extends Item implements Resettable {
      */
     public ConsumableItems(String name, char displayChar, boolean portable) {
         super(name, displayChar, portable);
-
+        this.registerInstance();
     }
 
     /**
@@ -48,9 +48,8 @@ public abstract class ConsumableItems extends Item implements Resettable {
         for (int i : x){
             for (int j : y){
                 Location here = map.at(i,j);
-                if (here.getItems().contains(this)){
-                    here.removeItem(this);
-                }
+                here.removeItem(this);
+
             }
         }
     }
