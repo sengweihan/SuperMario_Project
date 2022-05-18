@@ -10,12 +10,13 @@ import edu.monash.fit2099.engine.positions.World;
 import game.Status;
 import game.actions.EndGameAction;
 
+/**
+ * A princess that is abducted by Bowser
+ */
 public class PrincessPeach extends Actor {
     /**
      * Constructor.
-     *
      */
-
     public PrincessPeach() {
         super("Princess Peach", 'P', 999);
     }
@@ -25,6 +26,15 @@ public class PrincessPeach extends Actor {
         return new DoNothingAction();
     }
 
+    /**
+     * checks if other actor has the key in its inventory, if yes, allows the other actor
+     * to perform EndGameAction.
+     *
+     * @param otherActor the Actor that might be performing an action
+     * @param direction  String representing the direction of the other Actor
+     * @param map        current GameMap
+     * @return a list of actions of what other actor can do
+     */
     @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions = new ActionList();

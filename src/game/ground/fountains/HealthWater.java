@@ -3,6 +3,9 @@ package game.ground.fountains;
 import edu.monash.fit2099.engine.actors.Actor;
 import game.ground.fountains.FountainWater;
 
+/**
+ * A water that heals the actor that consumes it
+ */
 public class HealthWater extends FountainWater {
 
     @Override

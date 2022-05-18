@@ -10,7 +10,7 @@ import game.Status;
 import game.actions.enemiesaction.DestroyShellAction;
 import game.actions.enemiesaction.DormantAction;
 /**
- * an enemy that has a shell
+ * An abstract class for future specialised type of koopas to be born
  */
 public abstract class Koopa extends Enemies {
 

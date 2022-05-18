@@ -8,6 +8,9 @@ import game.Status;
 import game.actions.bottleaction.FillBottleAction;
 import game.interfaces.Drinkable;
 
+/**
+ * A ground structure that contains special water!
+ */
 public abstract class Fountains extends Ground implements Drinkable {
     protected int waterCount;
     protected int refillCount;
@@ -17,6 +20,7 @@ public abstract class Fountains extends Ground implements Drinkable {
      * Constructor.
      *
      * @param displayChar character to display for this type of terrain
+     * @param fountainWater the type of water this fountain contains
      */
     public Fountains(char displayChar,FountainWater fountainWater) {
         super(displayChar);

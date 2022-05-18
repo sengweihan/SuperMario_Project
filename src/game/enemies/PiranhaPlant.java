@@ -13,6 +13,9 @@ import game.Status;
 import game.behaviours.AttackBehaviour;
 import game.behaviours.Behaviour;
 
+/**
+ * A plant that is capable of eating the player alive
+ */
 public class PiranhaPlant extends Enemies {
 
     public PiranhaPlant() {
@@ -31,7 +34,7 @@ public class PiranhaPlant extends Enemies {
             Location location = exits.getDestination();
             if (location.containsAnActor()){
                 Actor otherActor = location.getActor();
-                if (otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)){
+                if (otherActor.hasCapability(Status.HOSTILE_TO_ENEMY) && successAttack()){
                     this.behaviours.put(0,new AttackBehaviour(otherActor));
                 }
             }

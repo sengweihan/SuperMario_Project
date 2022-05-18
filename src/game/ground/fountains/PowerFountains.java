@@ -1,5 +1,8 @@
 package game.ground.fountains;
 
+/**
+ * A fountain that holds water that can increases consumer's damage
+ */
 public class PowerFountains extends Fountains {
     /**
      * Constructor.

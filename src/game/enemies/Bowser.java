@@ -6,6 +6,9 @@ import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.Status;
 
+/**
+ * The king of all Koopas
+ */
 public class Bowser extends Enemies {
     /**
      * Constructor.

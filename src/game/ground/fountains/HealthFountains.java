@@ -1,7 +1,9 @@
 package game.ground.fountains;
 
+/**
+ * A fountain that holds water that can heal whoever that consumes it
+ */
 public class HealthFountains extends Fountains {
-
     /**
      * Constructor.
      */

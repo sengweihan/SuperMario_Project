@@ -117,7 +117,7 @@ public class Application {
 
 		PrincessPeach princessPeach = new PrincessPeach();
 		secondGameMap.addActor(princessPeach,secondGameMap.at(40,8));
-		secondGameMap.addActor(new Bowser(secondGameMap),secondGameMap.at(41,8));
+		secondGameMap.addActor(new Bowser(),secondGameMap.at(41,8));
 
 		world.run();
 
