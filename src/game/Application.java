@@ -16,6 +16,7 @@ import game.ground.fountains.HealthFountains;
 import game.ground.fountains.PowerFountains;
 import game.items.PowerStar;
 import game.items.SuperMushroom;
+import game.reset.ResetManager;
 
 /**
  * The main class for the Mario World game.
@@ -82,8 +83,6 @@ public class Application {
 
 		world.addGameMap(secondGameMap);
 
-
-
 		Actor mario = new Player("Mario", 'm', 100);
 		world.addPlayer(mario, gameMap.at(1, 0));
 
@@ -117,7 +116,8 @@ public class Application {
 
 		PrincessPeach princessPeach = new PrincessPeach();
 		secondGameMap.addActor(princessPeach,secondGameMap.at(40,8));
-		secondGameMap.addActor(new Bowser(secondGameMap),secondGameMap.at(41,8));
+		secondGameMap.addActor(new Bowser(),secondGameMap.at(41,8));
+
 
 		world.run();
 
