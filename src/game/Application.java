@@ -90,6 +90,8 @@ public class Application {
 		Actor toad = new Toad("MR.TOAD",'O',999);
 		gameMap.addActor(toad,gameMap.at(44,11));
 
+		secondGameMap.addActor(new Toad("MR.TOAD",'O',999),secondGameMap.at(43,11));
+
 		gameMap.locationOf(mario).addItem(new PowerStar());
 		gameMap.locationOf(mario).addItem(new SuperMushroom());
 
@@ -117,7 +119,7 @@ public class Application {
 
 		PrincessPeach princessPeach = new PrincessPeach();
 		secondGameMap.addActor(princessPeach,secondGameMap.at(40,8));
-		secondGameMap.addActor(new Bowser(secondGameMap),secondGameMap.at(41,8));
+		secondGameMap.addActor(new Bowser(),secondGameMap.at(41,8));
 
 		world.run();
 

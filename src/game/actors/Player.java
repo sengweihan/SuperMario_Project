@@ -27,7 +27,7 @@ public class Player extends Actor implements Resettable, DrinkPowerCount {
 	protected  int secondTick = 0;
 	protected final int TICK_COUNT = 10;
 	protected  final int FIRE_FLOWER_TICK = 20;
-	protected final static int INITIAL_WALLET_VALUE = 1300;
+	protected final static int INITIAL_WALLET_VALUE = 0;
 	public int walletValue;
 	private int drinkCount;
 
