@@ -10,6 +10,8 @@ import game.Status;
 
 public class Lava extends Ground {
     /**
+     * This ground has a burning capabilities
+     *
      * Constructor.
      *
      */
@@ -29,7 +31,17 @@ public class Lava extends Ground {
         return false;
     }
 
-
+    /**
+     * When the player is encountering this type of ground, then an action called lava move action
+     * will be trigger and allow the player to step on this ground by using that action.
+     *
+     * However, if the player insist to step on this ground, then he/she will get inflicted a damage of 15
+     *
+     * @param actor the Actor acting
+     * @param location the current Location
+     * @param direction the direction of the Ground from the Actor
+     * @return an action list
+     */
     @Override
     public ActionList allowableActions(Actor actor, Location location, String direction) {
         ActionList actionList = new ActionList();

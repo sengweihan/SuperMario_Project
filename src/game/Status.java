@@ -18,8 +18,8 @@ public enum Status {
     FINAL_BOSS,
     WIN_GAME,
     FLYING,
-    BURN,
-    FIRE_ATTACK,
+    BURN, // lava ground will have this status to tell actor that the current ground can inflict a damage on actor.
+    FIRE_ATTACK, // when the player consumes the fire flower , it will gain this status
     TELEPORT, // use this status to inform player that the ground can use to teleport player to other map.
 
 }

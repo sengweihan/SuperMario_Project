@@ -82,7 +82,7 @@ public class Player extends Actor implements Resettable, DrinkPowerCount {
 		else if (this.hasCapability(Status.FIRE_ATTACK)){
 			secondTick = 0;
 			this.removeCapability(Status.FIRE_ATTACK);
-			display.println("FIRE ATTACK EFFECT HAS WORK OFF!");
+			display.println("FIRE ATTACK EFFECT HAS WORN OFF!");
 		}
 
 		// once-off reset action

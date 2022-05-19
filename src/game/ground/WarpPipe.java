@@ -35,7 +35,15 @@ public class WarpPipe extends Ground implements Jumpable {
     }
 
     /**
-     * Piranha Plant will spawn at the second turn of the game.
+     * The first if statement is to check whether it is already the second
+     * turn of the game, if it is then a piranha plant will be spawn on top of
+     * the warp pipe.
+     *
+     * The second if statement is to check whether the warp pipe on the other side of map (target map)
+     * has been destroyed due to power star effect, if it does then the warp pipe in the current
+     * map will also be destroy as well since there's no need to maintain this warp pipe which
+     * could not teleport the actor to the target map anymore.
+     *
      * @param location The location of the Ground
      */
     @Override
@@ -53,13 +61,43 @@ public class WarpPipe extends Ground implements Jumpable {
 
     }
 
+    /**
+     * Since warp pipe allow player to jump on top of it, thus it will also need to implement
+     * the jumpable interface together with its method.
+     *
+     * @param actor
+     * @param map
+     * @param location
+     * @return a string
+     */
     @Override
     public String jump(Actor actor, GameMap map, Location location) {
         map.moveActor(actor, location);
         return actor + " is currently standing on top of the portal for teleportation ";
     }
 
-
+    /**
+     * Check for every possible cases that might happen :
+     * 1) When the location of warp pipe does not contain any actor and at the same time, player
+     * does not consume any power star then the player is allow to use jump action when encountering warp pipe.
+     *
+     * 2) When the player consumes power star and at the same time the location of warp pipe does not
+     * contain any actor , then the player do not need to jump instead it can just walk normally
+     * but for every ground that the player pass through, it will turn into a dirt and drop a coin.
+     *
+     * 3) If the location of warp pipe contains an actor and the actor is the player itself and at the
+     * same time the warp pipe in the target map is not destroy by the power star effect, then
+     * player can use the teleport action to teleport to the exact position of the warp pipe in the target map.
+     *
+     * 4) If all the above cases failed, then it will trigger the do nothing action meaning when
+     * the player encounter the warp pipe, there's no action that are able to be perform by the player on
+     * the warp pipe.
+     *
+     * @param actor the Actor acting
+     * @param location the current Location
+     * @param direction the direction of the Ground from the Actor
+     * @return an action list
+     */
     @Override
     public ActionList allowableActions(Actor actor, Location location, String direction) {
         ActionList actionList = new ActionList();
@@ -94,6 +132,11 @@ public class WarpPipe extends Ground implements Jumpable {
         return false;
     }
 
+
+    /**
+     * Print a string statement when an instance of this class is called.
+     * @return a string
+     */
     public String toString(){
         return "Warp pipe";
     }
