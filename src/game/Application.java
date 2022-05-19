@@ -90,6 +90,7 @@ public class Application {
 		Actor toad = new Toad("MR.TOAD",'O',999);
 		gameMap.addActor(toad,gameMap.at(44,11));
 
+
 		gameMap.locationOf(mario).addItem(new PowerStar());
 		gameMap.locationOf(mario).addItem(new SuperMushroom());
 
