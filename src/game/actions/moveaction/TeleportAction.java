@@ -20,20 +20,17 @@ public class TeleportAction extends Action {
 
     @Override
     public String execute(Actor actor, GameMap map) {
-        if (targetMap != map ){
 
-            if (targetMap.at(x,y).containsAnActor()){
-                targetMap.removeActor(targetMap.at(x,y).getActor());
-            }
 
-            map.removeActor(actor);
-            targetMap.addActor(actor, targetMap.at(x,y));
-
-            return actor + " " + menuDescription(actor);
+        if (targetMap.at(x,y).containsAnActor()){
+            targetMap.removeActor(targetMap.at(x,y).getActor());
         }
 
+        map.removeActor(actor);
+        targetMap.addActor(actor, targetMap.at(x,y));
 
-        return "Please try teleporting again!";
+        return actor + " " + menuDescription(actor);
+
 
     }
 

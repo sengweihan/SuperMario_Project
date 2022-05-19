@@ -20,5 +20,6 @@ public enum Status {
     FLYING,
     BURN,
     FIRE_ATTACK,
+    TELEPORT, // use this status to inform player that the ground can use to teleport player to other map.
 
 }

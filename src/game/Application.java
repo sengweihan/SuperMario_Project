@@ -85,10 +85,11 @@ public class Application {
 
 
 		Actor mario = new Player("Mario", 'm', 100);
-		world.addPlayer(mario, gameMap.at(1, 0));
+		world.addPlayer(mario, secondGameMap.at(1, 0));
 
 		Actor toad = new Toad("MR.TOAD",'O',999);
 		gameMap.addActor(toad,gameMap.at(44,11));
+
 
 		gameMap.locationOf(mario).addItem(new PowerStar());
 		gameMap.locationOf(mario).addItem(new SuperMushroom());

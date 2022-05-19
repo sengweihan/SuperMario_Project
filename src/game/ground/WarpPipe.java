@@ -26,6 +26,7 @@ public class WarpPipe extends Ground implements Jumpable {
      */
     public WarpPipe(int x, int y ,GameMap targetMap) {
         super('C');
+        this.addCapability(Status.TELEPORT);
         this.x = x;
         this.y = y;
         this.targetMap = targetMap;
@@ -43,6 +44,13 @@ public class WarpPipe extends Ground implements Jumpable {
         if (counter == 2 && !location.containsAnActor()){
             location.addActor(new PiranhaPlant());
         }
+
+        if(!targetMap.at(x,y).getGround().hasCapability(Status.TELEPORT)){
+            location.setGround(new Dirt());
+
+        }
+
+
     }
 
     @Override
@@ -64,7 +72,7 @@ public class WarpPipe extends Ground implements Jumpable {
             actionList.add(new PowerStarMoveAction(location,direction));
         }
 
-        else if (location.getActor().hasCapability(Status.HOSTILE_TO_ENEMY)){
+        else if (location.getActor().hasCapability(Status.HOSTILE_TO_ENEMY) && targetMap.at(x,y).getGround().hasCapability(Status.TELEPORT)){
             actionList.add(new TeleportAction(x,y,targetMap));
         }
 
