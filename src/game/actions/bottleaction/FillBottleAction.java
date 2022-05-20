@@ -16,20 +16,14 @@ public class FillBottleAction extends Action {
     /**
      * the fountain the player is at
      */
-    protected FountainWater fountainWater;
-    /**
-     * the fountain water the player fills the bottle with
-     */
     protected Fountains fountains;
 
     /**
      * Constructor.
      *
      * @param fountain the fountain the player is at
-     * @param fountainWater the fountain water the player fills the bottle with
      */
-    public FillBottleAction(Fountains fountain,FountainWater fountainWater){
-        this.fountainWater = fountainWater;
+    public FillBottleAction(Fountains fountain){
         this.fountains = fountain;
     }
 
@@ -44,8 +38,8 @@ public class FillBottleAction extends Action {
     @Override
     public String execute(Actor actor, GameMap map) {
         fountains.reduceCountByFilling();
-        Bottle.addWater(fountainWater);
-        return actor + " refill " + fountainWater;
+        Bottle.addWater(fountains.getWater());
+        return actor + " refill " + fountains.getWater();
     }
 
     /**
