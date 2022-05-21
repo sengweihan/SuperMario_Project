@@ -17,6 +17,7 @@ public class FireAttackAction extends AttackAction {
      * A fire attack action constructor.
      * @param target
      * @param direction
+     * @param item
      */
     public FireAttackAction(Enemies target, String direction,Burning item) {
         super(target, direction);
@@ -27,6 +28,7 @@ public class FireAttackAction extends AttackAction {
 
     /**
      * Will call the burn method that is implemented by those class which implements the burning interface method.
+     * Then it will call its parent's execute method which in this case is the AttackAction's execute method.
      *
      * @param actor The actor performing the action.
      * @param map The map the actor is on.
