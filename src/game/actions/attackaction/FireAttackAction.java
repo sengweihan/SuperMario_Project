@@ -8,26 +8,7 @@ import game.interfaces.Burning;
 
 import java.util.Random;
 
-public class FireAttackAction extends Action {
-
-    /**
-     * The Actor that is to be attacked
-     */
-    protected Actor target;
-
-    /**
-     * The direction of incoming attack.
-     */
-    protected String direction;
-
-    /**
-     * Random number generator
-     */
-    protected Random rand = new Random();
-
-    /**
-     *  Have a strong association with the instance of burning interface type.
-     */
+public class FireAttackAction extends AttackAction {
 
     protected Burning item;
 
@@ -36,12 +17,11 @@ public class FireAttackAction extends Action {
      * A fire attack action constructor.
      * @param target
      * @param direction
-     * @param item
      */
-    public FireAttackAction(Enemies target, String direction, Burning item) {
-        this.target = target;
-        this.direction = direction;
+    public FireAttackAction(Enemies target, String direction,Burning item) {
+        super(target, direction);
         this.item = item;
+
     }
 
 
@@ -54,7 +34,9 @@ public class FireAttackAction extends Action {
      */
     @Override
     public String execute(Actor actor, GameMap map) {
-        return item.burn(target,map);
+        item.burn(target,map);
+        return super.execute(actor, map);
+
     }
 
     /**

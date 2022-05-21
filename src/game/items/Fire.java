@@ -1,5 +1,7 @@
 package game.items;
 
+import edu.monash.fit2099.engine.actions.Action;
+import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
@@ -36,6 +38,7 @@ public class Fire extends Item implements Burning {
                 if (!location.getActor().isConscious()){
                     GameMap map = location.map();
                     map.removeActor(location.getActor());
+
                 }
             }
         }
@@ -45,32 +48,15 @@ public class Fire extends Item implements Burning {
 
     /**
      * This method will be called inside the fire attack action class.
-     * When the player uses fire attack on enemies, then the enemies location will drop a fire
-     * and will inflict a damage of 20 to the enemies who is standing on the ground that contain this fire item.
-     *
-     * It will also check if the target actor is conscious or not , if not it will automatically be removed from
-     * the current map and finally print a message on the console.
+     * When the player uses fire attack on enemies, then the enemies location will drop a fire item.
      *
      * @param target
      * @param map
      * @return a string
      */
     @Override
-    public String burn(Actor target, GameMap map) {
+    public void burn(Actor target, GameMap map) {
         map.locationOf(target).addItem(this);
-        target.hurt(FIRE_DAMAGE);
-
-        /**
-         *  if the target (enemies) hit point < 0 then it shall be remove from the current map.
-         */
-        if (!target.isConscious()){
-            map.removeActor(target);
-            return target + " is removed from the map due to extreme fire burning! ";
-
-
-        }
-        return  target + " burnt with a damage of " + FIRE_DAMAGE + "!";
-
 
     }
 
