@@ -83,6 +83,13 @@ public class Sprout extends Tree implements Jumpable {
         }
         else{
             actor.hurt(10);
+            /**
+             * Need to check whether the player is still alive after unsuccessful jump or else
+             * they will be cases where the player will have negative hitpoints and still alive in game.
+             */
+            if (!actor.isConscious()){
+                map.removeActor(actor);
+            }
             return actor + " jumped unsuccessful and inflicted a damage of 10";
         }
     }
