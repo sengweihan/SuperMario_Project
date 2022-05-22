@@ -33,6 +33,9 @@ public class LavaMoveAction extends MoveActorAction {
             actor.hurt(15);
 
         }
+        if (!actor.isConscious()){
+            map.removeActor(actor);
+        }
         return "ARGHHH " + actor + " is currently burning!";
     }
 
