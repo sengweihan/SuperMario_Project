@@ -21,28 +21,41 @@ public class Fire extends Item implements Burning {
     @Override
     public void tick(Location location) {
         counter += 1;
+
+        /**
+         * For every subsequent turn after the existence of fire item, it will continuously
+         * burn those actors who step into the ground that contain this item and this
+         * will last until the item is completely destroy.
+         *
+         * It will also check whether the actors that is currently standing on the fire
+         * is still alive or not, if not then some of the actor will drop some item on the ground
+         * that can be pick up by the player.
+         */
+        if (location.containsAnActor() && !location.getActor().hasCapability(Status.IMMUNITY) && !location.getActor().hasCapability(Status.FLYING)){
+            location.getActor().hurt(FIRE_DAMAGE);
+            if (!location.getActor().isConscious()){
+                GameMap map = location.map();
+
+                if (location.getActor().hasCapability(Status.FINAL_BOSS)){
+                    map.locationOf(location.getActor()).addItem(new Key());
+                    map.removeActor(location.getActor());
+                }
+                else if (location.getActor().hasCapability(Status.KOOP) && !location.getActor().hasCapability(Status.DORMANT)){
+                    location.getActor().addCapability(Status.DORMANT);
+                }
+                else if (!location.getActor().hasCapability(Status.DORMANT)){
+                    map.removeActor(location.getActor());
+                }
+
+            }
+        }
+
         /**
          * This fire item lasts only for 3 rounds.
          */
         if (counter % 3 == 0){
             location.removeItem(this);
         }
-        else{
-            /**
-             * For every subsequent turn after the existence of fire item, it will continuously
-             * burn those actors who step into the ground that contain this item and this
-             * will last until the item is completely destroy.
-             */
-            if (location.containsAnActor() && !location.getActor().hasCapability(Status.IMMUNITY) && !location.getActor().hasCapability(Status.FLYING)){
-                location.getActor().hurt(FIRE_DAMAGE);
-                if (!location.getActor().isConscious()){
-                    GameMap map = location.map();
-                    map.removeActor(location.getActor());
-
-                }
-            }
-        }
-
 
     }
 
