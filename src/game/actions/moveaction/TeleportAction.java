@@ -61,8 +61,8 @@ public class TeleportAction extends Action {
     @Override
     public String menuDescription(Actor actor) {
         if (targetMap.at(44,11).containsAnActor()){
-            return "Teleporting to original map!";
+            return "Teleport to original map";
         }
-        return "Teleporting to Lava Zone!";
+        return "Teleport to Lava Zone";
     }
 }
