@@ -1,8 +1,6 @@
 package game.enemies;
 
-import edu.monash.fit2099.engine.actions.MoveActorAction;
 import edu.monash.fit2099.engine.positions.GameMap;
-import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.Status;
 
@@ -29,5 +27,9 @@ public class Bowser extends Enemies {
         this.heal(500);
         map.removeActor(this);
         map.at(41,8).addActor(this);
+        this.previousActor = null;
+        this.previousActorLocation = null;
+        this.attacked = false;
+        this.behaviours.clear();
     }
 }
