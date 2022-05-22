@@ -16,6 +16,7 @@ import game.ground.fountains.HealthFountains;
 import game.ground.fountains.PowerFountains;
 import game.items.PowerStar;
 import game.items.SuperMushroom;
+import game.reset.ResetManager;
 
 /**
  * The main class for the Mario World game.
@@ -116,6 +117,14 @@ public class Application {
 
 			}
 		}
+
+		/**
+		 * creating a singleton ResetManager instance here, and add
+		 * all the gamemaps inside
+		 */
+		ResetManager resetManager = ResetManager.getInstance();
+		resetManager.addMap(gameMap);
+		resetManager.addMap(secondGameMap);
 
 		PrincessPeach princessPeach = new PrincessPeach();
 		secondGameMap.addActor(princessPeach,secondGameMap.at(40,8));

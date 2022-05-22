@@ -48,7 +48,10 @@ public abstract class ConsumableItems extends Item implements Resettable {
         for (int i : x){
             for (int j : y){
                 Location here = map.at(i,j);
-                here.removeItem(this);
+                if (here.getItems().contains(this)){
+                    here.removeItem(this);
+                }
+
 
             }
         }

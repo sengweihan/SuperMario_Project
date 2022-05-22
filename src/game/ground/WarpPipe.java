@@ -49,7 +49,7 @@ public class WarpPipe extends Ground implements Jumpable {
     @Override
     public void tick(Location location) {
         counter +=1;
-        if (counter == 2 && !location.containsAnActor()){
+        if (counter == 1 && !location.containsAnActor()){
             location.addActor(new PiranhaPlant());
         }
 
